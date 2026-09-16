@@ -11,9 +11,6 @@ function fish_greeting
 	#set_color brblue --bold
 	#echo '                  age  ' $(set_color normal) $(system_age)
 	echo ''
-	# CHM GREETING
-	# ~/chmcrypt.sh
-	# echo ''
 end
 #funcsave fish_greeting
 
@@ -43,6 +40,18 @@ alias lh='ls -lah'
 alias fastfetch-old='fastfetch -c ~/fastfetch.config.old.jsonc'
 alias rmhosts='rm -rf ~/.ssh/known_hosts'
 alias anon='fish -P'
+
+# ghostty-related configuration
+function sudo
+    # 1. Change terminal background to dark red
+    printf "\e]11;#3b0000\a"
+
+    # 2. Run the actual sudo command
+    command sudo $argv
+
+    # 3. Reset the terminal background back to your default
+    printf "\e]111\a"
+end
 
 #PATH
 export PATH="/home/ext/.local/bin:$PATH"
