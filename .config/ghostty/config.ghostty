@@ -9,6 +9,7 @@ cursor-style = block
 # Adjust row/line height. Values can be absolute pixels (e.g., 2px) or percentages (e.g., 15%).
 adjust-cell-height = 15%
 cursor-style-blink = true
+bold-is-bright = true
 
 # FONT SETTINGS
 font-feature = -calt, -liga, -dlig
@@ -47,7 +48,9 @@ keybind = ctrl+w=close_surface
 keybind = ctrl+tab=next_tab
 keybind = ctrl+shift+tab=previous_tab
 # Vanity Keybinds
-keybind = ctrl+backspace=text:\x17
+# Delete a word
+# keybind = ctrl+backspace=text:\x17
+keybind = ctrl+w=text:\x17
 keybind = f11=toggle_fullscreen
 keybind = ctrl+shift+n=unbind
 keybind = ctrl+alt+n=new_window
