@@ -1,0 +1,57 @@
+[font]
+size = 15.0
+
+[font.offset]
+x = 0
+y = 2  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[window]
+padding = { x = 12, y = 12 }
+opacity = 0.75
+blur = true
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#000000"
+
+[colors.selection]
+background = "#545454"
+text = "#ffffff"
+
+# Regular Colors (0-7) — Lifted for readability
+[colors.normal]
+black   = "#000000"
+red     = "#ff4444"
+green   = "#44ff44"
+yellow  = "#ffaa22"
+blue    = "#5577ff"
+magenta = "#ff55ff"
+cyan    = "#22dddd"
+white   = "#e0e0e0"
+
+# Intense/Bright Colors (8-15) — Pure vibrant values
+[colors.bright]
+black   = "#777777"
+red     = "#ff6666"
+green   = "#66ff66"
+yellow  = "#ffff66"
+blue    = "#6688ff"
+magenta = "#ff88ff"
+cyan    = "#66ffff"
+white   = "#ffffff"
