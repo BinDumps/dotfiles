@@ -1,0 +1,82 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Monospace", "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #eceff4;
+}
+
+/* Individual Module Pills */
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#backlight,
+#network,
+#tray {
+    background-color: #2e3440;
+    padding: 0px 14px;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+}
+
+#custom-clipboard {
+    font-size: 20px;
+    padding: 0 10px;
+    color: #88c0d0;
+    background: transparent;
+}
+
+#custom-clipboard:hover {
+    color: #5577ff;
+}
+
+/* Workspaces styling for Niri */
+#workspaces button {
+    padding: 0 8px;
+    color: #4c566a;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #88c0d0;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #e5e9f0;
+}
+
+/* Module accent colors */
+#clock {
+    color: #88c0d0;
+}
+
+#cpu {
+    color: #a3be8c;
+}
+
+#memory {
+    color: #ebcb8b;
+}
+
+#pulseaudio {
+    color: #b48ead;
+}
+
+#network {
+    color: #81a1c1;
+}
+
+#window {
+    color: #d8dee9;
+    font-weight: normal;
+}
