@@ -1,0 +1,85 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 6,
+    "margin-bottom": 6,
+    "margin-left": 12,
+    "margin-right": 12,
+    "height": 32,
+    "spacing": 8,
+
+    "modules-left": [
+        "niri/workspaces",
+        "niri/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "pulseaudio",
+	"backlight",
+        "network",
+	"custom/clipboard",	
+        "tray"
+    ],
+
+    "niri/workspaces": {
+        "format": "{index}",
+        "active-only": false
+    },
+
+    "niri/window": {
+        "format": "{}",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+    "custom/clipboard": {
+    	"format": "󰅍",
+    	"tooltip-format": "Clipboard History",
+    	"on-click": "~/.local/bin/cliphist-fuzzel.sh",
+    	"on-click-right": "cliphist wipe && notify-send 'Clipboard Cleared'"
+    },
+
+    "clock": {
+        "format": "{:%a, %b %d — %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "format": "CPU {usage}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "RAM {percentage}%",
+        "interval": 3
+    },
+
+    "pulseaudio": {
+        "format": "VOL {volume}%",
+        "format-muted": "MUTED",
+        "on-click": "pavucontrol"
+    },
+
+    "backlight": {
+	"format": "{icon} {percent}%",
+	"format-icons": ["󰃞", "󰃟", "󰃠"],
+	"on-scroll-up": "brightnessctl set 5%+",
+	"on-scroll-down": "brightnessctl set 5%-",
+	"tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "WIFI {signalStrength}%",
+        "format-ethernet": "LAN",
+        "format-disconnected": "OFFLINE",
+        "on-click": "alacritty -e nmtui"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    }
+}
