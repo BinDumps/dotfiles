@@ -1,7 +1,7 @@
 #!/bin/bash
 
 THEME_DIR="$HOME/.local/share/themes"
-NIRI_CONFIG="$HOME/.config/niri/config.kdl"
+NIRI_THEME_FILE="$HOME/.config/niri/theme-colors.kdl"
 
 # If an argument is passed directly, use it. Otherwise, use Fuzzel to pick one!
 if [ -n "$1" ]; then
@@ -29,7 +29,6 @@ if [ -d "$TARGET_DIR" ]; then
 
     # Set wallpaper using awww if wallpaper directory/file exists
     if [ -d "$TARGET_DIR/wallpaper" ]; then
-        # Find first image file in wallpaper directory
         WALLPAPER=$(find "$TARGET_DIR/wallpaper" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) | head -n 1)
 
         if [ -n "$WALLPAPER" ]; then
@@ -37,36 +36,17 @@ if [ -d "$TARGET_DIR" ]; then
         fi
     fi
 
-    # Update Niri focus-ring strictly inside focus-ring block
-    if [ -f "$TARGET_DIR/active-color.txt" ] && [ -f "$NIRI_CONFIG" ]; then
+    # Overwrite isolated theme-colors.kdl directly (Zero risk to main config)
+    if [ -f "$TARGET_DIR/active-color.txt" ]; then
         COLOR_LINE=$(tr -d '\r\n' < "$TARGET_DIR/active-color.txt")
 
-        python3 - "$NIRI_CONFIG" "$COLOR_LINE" << 'EOF'
-import sys, re
-
-config_path = sys.argv[1]
-new_line = sys.argv[2]
-
-with open(config_path, 'r') as f:
-    content = f.read()
-
-# Match ONLY inside focus-ring { ... } block
-def replace_in_focus_ring(match):
-    block_content = match.group(1)
-    updated_block = re.sub(
-        r'(?m)^([ \t]*)(active-color|active-gradient)[ \t].*',
-        r'\1' + new_line,
-        block_content
-    )
-    return f"focus-ring {{\n{updated_block}\n}}"
-
-new_content = re.sub(r'focus-ring\s*\{([^}]*)\}', replace_in_focus_ring, content, flags=re.DOTALL)
-
-with open(config_path, 'w') as f:
-    f.write(new_content)
+        cat << EOF > "$NIRI_THEME_FILE"
+layout {
+    focus-ring {
+        $COLOR_LINE
+    }
+}
 EOF
-
-        touch "$NIRI_CONFIG"
     fi
 
     # Gracefully reload Waybar
