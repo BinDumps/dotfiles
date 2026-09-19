@@ -23,7 +23,8 @@
 	"backlight",
         "network",
 	"custom/language",
-	"custom/clipboard",	
+	"custom/clipboard",
+	"custom/themes",
 	"custom/power"
     ],
 
@@ -124,6 +125,15 @@
         "icon-size": 14,
         "spacing": 10
     },
+
+    "custom/themes": {
+        "format": "󰔎",
+        "on-click": "switch-theme",
+        "tooltip": true,
+        "tooltip-format": "Switch system theme",
+	"on-click": "~/.local/bin/switch-theme.sh"
+    },
+
     "custom/power": {
 	"format": "󰐥",
 	"tooltip": false,
