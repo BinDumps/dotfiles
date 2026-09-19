@@ -3,8 +3,7 @@ My dotfiles
 Packages used:
 
 ```bash
-sudo pacman -S
-  niri \
+sudo pacman -S niri \
   alacritty \
   fuzzel \
   waybar \
