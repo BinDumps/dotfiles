@@ -662,7 +662,13 @@ window-rule {
     }
 }
 
+// Dark mode for apps (christ that took too long)
+
 environment {
-    GTK_THEME "Adwaita-dark"
-    COLORSCHEME "prefer-dark"
+    GTK_THEME "Adwaita:dark"
+    QT_QPA_PLATFORMTHEME "gtk3"
 }
+
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "GTK_THEME=Adwaita:dark" "XDG_CURRENT_DESKTOP=niri"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Adwaita-dark"
