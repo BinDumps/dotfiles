@@ -1,0 +1,62 @@
+[font]
+size = 15.0
+
+[font.offset]
+x = 0
+y = 2
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[window]
+padding = { x = 12, y = 12 }
+opacity = 0.80
+blur = true
+
+[colors.primary]
+background = "#050a06"
+foreground = "#e6ffe6"
+
+[colors.cursor]
+cursor = "#00ff66"
+text = "#050a06"
+
+[colors.selection]
+background = "#0f381b"
+text = "#ffffff"
+
+# Regular Colors (Phosphor Green & Monochrome Accents)
+[colors.normal]
+black   = "#0a140c"
+red     = "#33aa55"
+green   = "#00ff66"
+yellow  = "#88ffaa"
+blue    = "#00cc55"
+magenta = "#b3ffcc"
+cyan    = "#55ff99"
+white   = "#d0f0d8"
+
+# Intense/Bright Colors (Vibrant Green Highlights & Pure Whites)
+[colors.bright]
+black   = "#1f4027"
+red     = "#55ff88"
+green   = "#33ff88"
+yellow  = "#bbffdd"
+blue    = "#00ff77"
+magenta = "#e6ffff"
+cyan    = "#88ffbb"
+white   = "#ffffff"
+
+[[keyboard.bindings]]
+key = "F11"
+mods = "None"
+action = "ToggleFullscreen"

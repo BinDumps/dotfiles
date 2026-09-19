@@ -1,0 +1,149 @@
+* {
+border: none;
+border-radius: 0;
+font-family: "Monospace", "Inter", sans-serif;
+font-weight: bold;
+font-size: 13px;
+min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #e6ffe6;
+}
+
+/* Individual Module Pills */
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#backlight,
+#network,
+#tray {
+padding: 0px 14px;
+background-color: #07120a;
+border-radius: 12px;
+border: 1px solid #13331c;
+}
+
+/* Fix Waybar Tray Context Menus */
+#tray menu {
+background-color: #07120a;
+color: #ffffff;
+border: 1px solid #00ff66;
+padding: 4px;
+}
+
+#tray menu menuitem {
+background-color: transparent;
+color: #e6ffe6;
+padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+background-color: #0f381b;
+color: #ffffff;
+}
+
+#custom-clipboard {
+font-size: 19px;
+padding: 0 14px;
+color: #00ff66;
+background-color: #07120a;
+border-radius: 12px;
+border: 1px solid #13331c;
+}
+
+#custom-clipboard:hover {
+color: #ffffff;
+}
+
+/* Workspaces styling for Niri */
+#workspaces button {
+padding: 0 8px;
+color: #1a4d27;
+background: transparent;
+}
+
+#workspaces button.active {
+color: #00ff66;
+}
+
+#workspaces button:hover {
+background: transparent;
+color: #ffffff;
+}
+
+/* Module accent colors (Green & Crisp White Tones) */
+#clock {
+color: #ffffff;
+}
+
+#cpu {
+color: #00ff66;
+}
+
+#memory {
+color: #88ffaa;
+}
+
+#pulseaudio {
+color: #33ff88;
+}
+
+#pulseaudio.muted {
+color: #1a4d27;
+}
+
+#network {
+color: #55ff99;
+}
+
+#network.disconnected {
+color: #ff5555;
+}
+
+#custom-power {
+font-size: 20px;
+padding: 0 18px;
+color: #00ff66;
+background-color: #07120a;
+border-radius: 12px;
+border: 1px solid #13331c;
+}
+
+#custom-power:hover {
+color: #ffffff;
+}
+
+#custom-language {
+padding: 0 16px;
+color: #88ffaa;
+background-color: #07120a;
+border-radius: 12px;
+border: 1px solid #13331c;
+}
+
+#custom-language:hover {
+color: #ffffff;
+}
+
+#custom-themes {
+font-size: 20px;
+padding: 0 16px;
+color: #00ff66;
+background-color: #07120a;
+border-radius: 12px;
+border: 1px solid #13331c;
+}
+
+#custom-themes:hover {
+color: #ffffff;
+}
+
+#window {
+color: #d0f0d8;
+font-weight: normal;
+}

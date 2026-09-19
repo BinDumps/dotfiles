@@ -1,0 +1,39 @@
+[window]
+padding = { x = 12, y = 12 }
+opacity = 0.75
+blur = true
+
+[font]
+size=15.0
+
+[font.offset]
+x = 0
+y = 2
+
+[colors.primary]
+background = "#121013"
+foreground = "#fce8e6"
+
+[colors.cursor]
+text = "#121013"
+cursor = "#ff7518"
+
+[colors.normal]
+black = "#282126"
+red = "#ff4757"
+green = "#2ed573"
+yellow = "#ffa502"
+blue = "#70a1ff"
+magenta = "#a55eea"
+cyan = "#ff9f43"
+white = "#fce8e6"
+
+[colors.bright]
+black = "#5a4f56"
+red = "#ff6b81"
+green = "#2ed876"
+yellow = "#ffbc75"
+blue = "#8db4ff"
+magenta = "#b977e6"
+cyan = "#ffb142"
+white = "#ffffff"

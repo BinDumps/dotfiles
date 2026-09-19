@@ -1,0 +1,8 @@
+[mode=default]
+default-timeout=5000
+ignore-timeout=1
+font=Monospace 11
+background-color=#050a06e6
+text-color=#ffffff
+border-color=#00ff66
+border-size=2
