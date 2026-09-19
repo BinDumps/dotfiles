@@ -1,0 +1,151 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Monospace", "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #eceff4;
+}
+
+/* Individual Module Pills */
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#backlight,
+#network,
+#tray {
+    padding: 0px 14px;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+}
+
+/* Fix Waybar Tray Context Menus */
+#tray menu {
+    background-color: #2e3440;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    padding: 4px;
+}
+
+#tray menu menuitem {
+    background-color: transparent;
+    color: #cdd6f4;
+    padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+    background-color: #111224;
+    color: #ffffff;
+}
+
+#custom-clipboard {
+    font-size: 19px;
+    padding: 0 14px;
+    color: #88c0d0;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+
+}
+
+#custom-clipboard:hover {
+    color: #aaeafa;
+}
+
+/* Workspaces styling for Niri */
+#workspaces button {
+    padding: 0 8px;
+    color: #4c566a;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #88c0d0;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #e5e9f0;
+}
+
+/* Module accent colors */
+#clock {
+    color: #88c0d0;
+}
+
+#cpu {
+    color: #a3be8c;
+}
+
+#memory {
+    color: #ebcb8b;
+}
+
+#pulseaudio {
+    color: #b48ead;
+}
+
+#pulseaudio.muted {
+    color: #4c566a;
+}
+
+#network {
+    color: #81a1c1;
+}
+
+#network.disconnected {
+    color: #bf616a;
+}
+
+#custom-power {
+    font-size: 20px;
+    padding: 0 18px;
+    color: #bf616a;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+
+}
+
+#custom-power:hover {
+    color: #d08770;
+}
+
+#custom-language {
+    padding: 0 16px;
+    color: #cacaca;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+}
+
+#custom-language:hover {
+    color: #ffffff;
+}
+
+#custom-themes {
+    font-size: 20px;
+    padding: 0 16px;
+    color: #2ed791;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #282126;
+}
+
+#custom-themes:hover {
+    color: #afffff;
+}
+
+#window {
+    color: #d8dee9;
+    font-weight: normal;
+}
