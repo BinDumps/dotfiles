@@ -22,21 +22,24 @@ window#waybar {
 #backlight,
 #network,
 #tray {
-    background-color: #2e3440;
     padding: 0px 14px;
+    background-color: #2e3440;
     border-radius: 12px;
     border: 1px solid #3b4252;
 }
 
 #custom-clipboard {
-    font-size: 20px;
-    padding: 0 10px;
+    font-size: 19px;
+    padding: 0 14px;
     color: #88c0d0;
-    background: transparent;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+
 }
 
 #custom-clipboard:hover {
-    color: #5577ff;
+    color: #aaeafa;
 }
 
 /* Workspaces styling for Niri */
@@ -72,8 +75,42 @@ window#waybar {
     color: #b48ead;
 }
 
+#pulseaudio.muted {
+    color: #4c566a;
+}
+
 #network {
     color: #81a1c1;
+}
+
+#network.disconnected {
+    color: #bf616a;
+}
+
+#custom-power {
+    font-size: 20px;
+    padding: 0 18px;
+    color: #bf616a;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+
+}
+
+#custom-power:hover {
+    color: #d08770;
+}
+
+#custom-language {
+    padding: 0 16px;
+    color: #cacaca;
+    background-color: #2e3440;
+    border-radius: 12px;
+    border: 1px solid #3b4252;
+}
+
+#custom-language:hover {
+    color: #ffffff;
 }
 
 #window {
