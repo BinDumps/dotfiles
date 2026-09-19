@@ -40,6 +40,8 @@ alias lh='ls -lah'
 alias fastfetch-old='fastfetch -c ~/fastfetch.config.old.jsonc'
 alias rmhosts='rm -rf ~/.ssh/known_hosts'
 alias anon='fish -P'
+alias ssh="TERM=xterm-256color command ssh"
+alias lazyssh="TERM=xterm-256color command lazyssh"
 
 # ghostty-related configuration
 function sudo
