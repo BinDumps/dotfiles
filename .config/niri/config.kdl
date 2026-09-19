@@ -6,6 +6,7 @@
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Input
+include optional=true "theme-colors.kdl"
 input {
     keyboard {
         xkb {
@@ -156,41 +157,6 @@ layout {
 
     // You can change how the focus ring looks.
     focus-ring {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Uncomment this line to disable the focus ring.
         // off
 
@@ -203,7 +169,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-gradient from="#aabaef" to="#000000" angle=45
+        // active-gradient from="#aabaef" to="#000000" angle=45
 
         // Color of the ring aon inactive monitors.
         //
@@ -225,41 +191,6 @@ layout {
         // To do that, set relative-to="workspace-view".
         //
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
     // You can also add a border. It's similar to the focus ring, but always visible.
