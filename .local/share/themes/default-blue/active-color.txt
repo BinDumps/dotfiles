@@ -1,0 +1,1 @@
+active-gradient from="#aabaef" to="#000000" angle=45
