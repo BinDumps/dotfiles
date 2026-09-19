@@ -1,0 +1,12 @@
+[mode=default]
+# Time in milliseconds before popups auto-dismiss (e.g 3000ms = 3 seconds)
+default-timeout=5000
+
+# Optional: Ignore custom expiration times sent by apps and strictly force your timeout
+ignore-timeout=1
+
+font=Monospace 11
+background-color=#1e1e2ee6
+text-color=#cdd6f4
+border-color=#88c0d0
+border-size=2
