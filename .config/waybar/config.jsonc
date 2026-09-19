@@ -16,13 +16,15 @@
         "clock"
     ],
     "modules-right": [
+        "tray",
         "cpu",
         "memory",
         "pulseaudio",
 	"backlight",
         "network",
+	"custom/language",
 	"custom/clipboard",	
-        "tray"
+	"custom/power"
     ],
 
     "niri/workspaces": {
@@ -43,8 +45,25 @@
     },
 
     "clock": {
-        "format": "{:%a, %b %d — %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+	"format": "󰥔 {:%I:%M %p}",
+        "format-alt": "󰃭 {:%A, %B %d, %Y}",
+        "tooltip-format": "<span size='14000'><b>{:%B %Y}</b></span>\n\n<tt><span size='11000'>{calendar}</span></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#88c0d0'><b>{}</b></span>",
+                "days": "<span color='#e5e9f0'><b>{}</b></span>",
+                "weekdays": "<span color='#81a1c1'><b>{}</b></span>",
+                "today": "<span color='#bf616a'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
 
     "cpu": {
@@ -58,9 +77,20 @@
     },
 
     "pulseaudio": {
-        "format": "VOL {volume}%",
-        "format-muted": "MUTED",
-        "on-click": "pavucontrol"
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "tooltip": false
     },
 
     "backlight": {
@@ -72,14 +102,31 @@
     },
 
     "network": {
-        "format-wifi": "WIFI {signalStrength}%",
-        "format-ethernet": "LAN",
-        "format-disconnected": "OFFLINE",
-        "on-click": "alacritty -e nmtui"
+        // "interface": "wlan0", // Optional: leave unset if Waybar auto-detects
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰤭 Disconnected",
+        "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
+        "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
+	"on-click": "~/.local/bin/waybar-network-menu.sh"
+    },
+
+    "custom/language": {
+        "exec": "~/.local/bin/waybar-niri-layout.sh",
+        "format": "󰌌 {}",
+        "tooltip": false,
+        "on-click": "niri msg action switch-layout next"
     },
 
     "tray": {
         "icon-size": 14,
         "spacing": 10
+    },
+    "custom/power": {
+	"format": "󰐥",
+	"tooltip": false,
+	"on-click": "~/.local/bin/waybar-powermenu.sh"
     }
 }
