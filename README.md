@@ -2,7 +2,7 @@ My dotfiles
 
 Packages used:
 
-```pacman
+```bash
 sudo pacman -S
   niri \
   alacritty \
@@ -27,7 +27,7 @@ sudo pacman -S
   qt6ct
 ```
 
-```AUR
+```bash
 sudo yay -s waypaper
 ```
 
