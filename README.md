@@ -3,7 +3,8 @@ My dotfiles
 Packages used:
 
 ```pacman
-sudo pacman -S niri \
+sudo pacman -S
+  niri \
   alacritty \
   fuzzel \
   waybar \
@@ -29,3 +30,5 @@ sudo pacman -S niri \
 ```AUR
 sudo yay -s waypaper
 ```
+
+optional: fish, ghostty
