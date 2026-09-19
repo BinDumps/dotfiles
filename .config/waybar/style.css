@@ -28,6 +28,25 @@ window#waybar {
     border: 1px solid #3b4252;
 }
 
+/* Fix Waybar Tray Context Menus */
+#tray menu {
+    background-color: #2e3440;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    padding: 4px;
+}
+
+#tray menu menuitem {
+    background-color: transparent;
+    color: #cdd6f4;
+    padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+    background-color: #111224;
+    color: #ffffff;
+}
+
 #custom-clipboard {
     font-size: 19px;
     padding: 0 14px;
