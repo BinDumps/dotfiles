@@ -55,3 +55,8 @@ blue    = "#6688ff"
 magenta = "#ff88ff"
 cyan    = "#66ffff"
 white   = "#ffffff"
+
+[[keyboard.bindings]]
+key = "F11"
+mods = "None"
+action = "ToggleFullscreen"
