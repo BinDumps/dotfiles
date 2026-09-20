@@ -20,6 +20,7 @@
         "cpu",
         "memory",
         "pulseaudio",
+	"pulseaudio#source",
 	"backlight",
         "network",
 	"custom/language",
@@ -91,16 +92,28 @@
         },
         "scroll-step": 5,
         "on-click": "pavucontrol",
-        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 Muted",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
         "tooltip": false
     },
 
     "backlight": {
-	"format": "{icon} {percent}%",
-	"format-icons": ["󰃞", "󰃟", "󰃠"],
-	"on-scroll-up": "brightnessctl set 5%+",
-	"on-scroll-down": "brightnessctl set 5%-",
-	"tooltip": false
+	    "format": "{icon} {percent}%",
+		"format-icons": ["󰃞", "󰃟", "󰃠"],
+		"on-scroll-up": "brightnessctl set 5%+",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
     },
 
     "network": {
