@@ -19,6 +19,7 @@ window#waybar {
 #cpu,
 #memory,
 #pulseaudio,
+#pulseaudio.source,
 #backlight,
 #network,
 #tray {
