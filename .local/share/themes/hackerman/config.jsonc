@@ -1,0 +1,151 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 4,
+    "margin-bottom": 0,
+    "margin-left": 8,
+    "margin-right": 8,
+    "height": 28,
+    "spacing": 4,
+
+    "modules-left": [
+        "custom/themes",
+        "niri/workspaces",
+        "niri/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "backlight",
+        "pulseaudio",
+        "pulseaudio#source",
+        "network",
+        "custom/language",
+        "custom/clipboard",
+        "tray",
+        "custom/power"
+    ],
+
+    "niri/workspaces": {
+        "format": "󰞷 {index}",
+        "active-only": false
+    },
+
+    "niri/window": {
+        "format": "󰘔 {}",
+        "max-length": 35,
+        "separate-outputs": true
+    },
+
+    "clock": {
+        "format": "󰥔 {:%I:%M:%S %p}",
+        "format-alt": "󰃭 {:%Y.%m.%d}",
+        "interval": 1,
+        "tooltip-format": "<tt><span size='11000'>{calendar}</span></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#00ff66'><b>{}</b></span>",
+                "days": "<span color='#ffffff'><b>{}</b></span>",
+                "weekdays": "<span color='#008833'><b>{}</b></span>",
+                "today": "<span color='#00ff66'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "interval": 1
+    },
+
+    "memory": {
+        "format": "󰘚 {percentage}%",
+        "interval": 2
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 {volume}%",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "tooltip": false
+    },
+
+    "backlight": {
+        "format": "󰃠 {percent}%",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-linked": "󰈀 NO IP",
+        "format-disconnected": "󰤭 DISCX",
+        "tooltip-format-wifi": "󰤨 {essid}\n󰩟 {ipaddr}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
+        "on-click": "~/.local/bin/waybar-network-menu.sh"
+    },
+
+    "custom/language": {
+        "exec": "~/.local/bin/waybar-niri-layout.sh",
+        "format": "󰌌 {}",
+        "tooltip": false,
+        "on-click": "niri msg action switch-layout next"
+    },
+
+    "custom/clipboard": {
+        "format": "󰅍",
+        "tooltip-format": "Clipboard History",
+        "on-click": "~/.local/bin/cliphist-fuzzel.sh",
+        "on-click-right": "cliphist wipe && wl-copy -c && notify-send 'Clipboard Cleared'"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "custom/themes": {
+        "format": "󰔎",
+        "tooltip": true,
+        "tooltip-format": "Switch system theme",
+        "on-click": "~/.local/bin/switch-theme.sh"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "~/.local/bin/waybar-powermenu.sh"
+    }
+}

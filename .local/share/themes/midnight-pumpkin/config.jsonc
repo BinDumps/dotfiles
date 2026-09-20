@@ -1,0 +1,144 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 6,
+    "margin-bottom": 0,
+    "margin-left": 12,
+    "margin-right": 12,
+    "height": 32,
+    "spacing": 6,
+
+    "modules-left": [
+        "custom/power",
+        "niri/workspaces",
+        "niri/window"
+    ],
+    "modules-center": [
+        "clock",
+        "custom/themes"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "pulseaudio#source",
+        "backlight",
+        "cpu",
+        "memory",
+        "network",
+        "custom/language",
+        "custom/clipboard",
+        "tray"
+    ],
+
+    "niri/workspaces": {
+        "format": "󰮯 {index}",
+        "active-only": false
+    },
+
+    "niri/window": {
+        "format": "󰌵 {}",
+        "max-length": 32,
+        "separate-outputs": true
+    },
+
+    "clock": {
+        "format": "󰥔 {:%H:%M  󰃭  %b %d}",
+        "format-alt": "󰥔 {:%I:%M %p  󰃭  %A, %B %d, %Y}",
+        "tooltip-format": "<tt><span size='11000'>{calendar}</span></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ff7518'><b>{}</b></span>",
+                "days": "<span color='#e0d0c0'><b>{}</b></span>",
+                "weekdays": "<span color='#8c5a3c'><b>{}</b></span>",
+                "today": "<span color='#ff7518'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "cpu": {
+        "format": "󰘚 {usage}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 3
+    },
+
+    "pulseaudio": {
+        "format": "󰕾 {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 {volume}%",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "tooltip": false
+    },
+
+    "backlight": {
+        "format": "󰃠 {percent}%",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨 {essid}",
+        "format-ethernet": "󰈀 {ipaddr}",
+        "format-linked": "󰈀 Link",
+        "format-disconnected": "󰤭 Off",
+        "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
+        "on-click": "~/.local/bin/waybar-network-menu.sh"
+    },
+
+    "custom/language": {
+        "exec": "~/.local/bin/waybar-niri-layout.sh",
+        "format": "󰌌 {}",
+        "tooltip": false,
+        "on-click": "niri msg action switch-layout next"
+    },
+
+    "custom/clipboard": {
+        "format": "󰅍",
+        "tooltip-format": "Clipboard History",
+        "on-click": "~/.local/bin/cliphist-fuzzel.sh",
+        "on-click-right": "cliphist wipe && wl-copy -c && notify-send 'Clipboard Cleared'"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "custom/themes": {
+        "format": "󰔎",
+        "tooltip": true,
+        "tooltip-format": "Switch system theme",
+        "on-click": "~/.local/bin/switch-theme.sh"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "~/.local/bin/waybar-powermenu.sh"
+    }
+}

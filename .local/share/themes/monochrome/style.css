@@ -97,6 +97,7 @@ window#waybar {
 
 #pulseaudio:not(.source).muted {
     color: #555555;
+    font-size: 19px;
 }
 
 /* Microphone Input */
@@ -106,10 +107,12 @@ window#waybar {
 
 #pulseaudio.source.source-muted {
     color: #555555;
+    font-size: 19px;
 }
 
 #network {
     color: #cccccc;
+    font-size: 19px;
 }
 
 #network.disconnected {
@@ -158,3 +161,4 @@ window#waybar {
     color: #dddddd;
     font-weight: normal;
 }
+
