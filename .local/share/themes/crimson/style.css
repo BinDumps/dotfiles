@@ -1,10 +1,10 @@
 * {
-border: none;
-border-radius: 0;
-font-family: "Monospace", "Inter", sans-serif;
-font-weight: bold;
-font-size: 13px;
-min-height: 0;
+    border: none;
+    border-radius: 0;
+    font-family: "Monospace", "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
 }
 
 window#waybar {
@@ -23,128 +23,128 @@ window#waybar {
 #backlight,
 #network,
 #tray {
-padding: 0px 14px;
-background-color: #1a0509;
-border-radius: 12px;
-border: 1px solid #3d0c15;
+    padding: 0px 14px;
+    background-color: #1a0509;
+    border-radius: 12px;
+    border: 1px solid #3d0c15;
 }
 
 /* Fix Waybar Tray Context Menus */
 #tray menu {
-background-color: #1a0509;
-color: #ffffff;
-border: 1px solid #ff1744;
-padding: 4px;
+    background-color: #1a0509;
+    color: #ffffff;
+    border: 1px solid #ff1744;
+    padding: 4px;
 }
 
 #tray menu menuitem {
-background-color: transparent;
-color: #fce8e8;
-padding: 4px 8px;
+    background-color: transparent;
+    color: #fce8e8;
+    padding: 4px 8px;
 }
 
 #tray menu menuitem:hover {
-background-color: #4a0d18;
-color: #ffffff;
+    background-color: #4a0d18;
+    color: #ffffff;
 }
 
 #custom-clipboard {
-font-size: 19px;
-padding: 0 14px;
-color: #ff1744;
-background-color: #1a0509;
-border-radius: 12px;
-border: 1px solid #3d0c15;
+    font-size: 19px;
+    padding: 0 14px;
+    color: #ff1744;
+    background-color: #1a0509;
+    border-radius: 12px;
+    border: 1px solid #3d0c15;
 }
 
 #custom-clipboard:hover {
-color: #ff5252;
+    color: #ff5252;
 }
 
 /* Workspaces styling for Niri */
 #workspaces button {
-padding: 0 8px;
-color: #661e2c;
-background: transparent;
+    padding: 0 8px;
+    color: #661e2c;
+    background: transparent;
 }
 
 #workspaces button.active {
-color: #ff1744;
+    color: #ff1744;
 }
 
 #workspaces button:hover {
-background: transparent;
-color: #ffffff;
+    background: transparent;
+    color: #ffffff;
 }
 
 /* Module accent colors */
 #clock {
-color: #ff5252;
+    color: #ff5252;
 }
 
 #cpu {
-color: #ff1744;
+    color: #ff1744;
 }
 
 #memory {
-color: #ff80ab;
+    color: #ff80ab;
 }
 
 #pulseaudio {
-color: #ea80fc;
+    color: #ea80fc;
 }
 
 #pulseaudio.muted {
-color: #661e2c;
+    color: #661e2c;
 }
 
 #network {
-color: #ff5577;
+    color: #ff5577;
 }
 
 #network.disconnected {
-color: #880e4f;
+    color: #880e4f;
 }
 
 #custom-power {
-font-size: 20px;
-padding: 0 18px;
-color: #ff1744;
-background-color: #1a0509;
-border-radius: 12px;
-border: 1px solid #3d0c15;
+    font-size: 20px;
+    padding: 0 18px;
+    color: #ff1744;
+    background-color: #1a0509;
+    border-radius: 12px;
+    border: 1px solid #3d0c15;
 }
 
 #custom-power:hover {
-color: #ffffff;
+    color: #ffffff;
 }
 
 #custom-language {
-padding: 0 16px;
-color: #fce8e8;
-background-color: #1a0509;
-border-radius: 12px;
-border: 1px solid #3d0c15;
+    padding: 0 16px;
+    color: #fce8e8;
+    background-color: #1a0509;
+    border-radius: 12px;
+    border: 1px solid #3d0c15;
 }
 
 #custom-language:hover {
-color: #ffffff;
+    color: #ffffff;
 }
 
 #custom-themes {
-font-size: 20px;
-padding: 0 16px;
-color: #ff1744;
-background-color: #1a0509;
-border-radius: 12px;
-border: 1px solid #3d0c15;
+    font-size: 20px;
+    padding: 0 16px;
+    color: #ff1744;
+    background-color: #1a0509;
+    border-radius: 12px;
+    border: 1px solid #3d0c15;
 }
 
 #custom-themes:hover {
-color: #ff5252;
+    color: #ff5252;
 }
 
 #window {
-color: #e8d5d5;
-font-weight: normal;
+    color: #e8d5d5;
+    font-weight: normal;
 }
