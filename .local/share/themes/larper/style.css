@@ -1,0 +1,166 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Hack Nerd Font Mono", "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    border: none;
+}
+
+window#waybar > box {
+    /* border: 1px solid #121021; */
+    background: linear-gradient(90deg, #010101, #100013, #010101);
+    padding: 6px 16px;
+    color: #e2d9f3;
+}
+
+/* Base Module Pill Styling */
+#workspaces,
+#window,
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#pulseaudio.source,
+#backlight,
+#network,
+#tray {
+    padding: 0px 14px;
+    background-color: #131021;
+    border-radius: 12px;
+    border: 1px solid #292240;
+}
+
+/* Fix Waybar Tray Context Menus */
+#tray menu {
+    background-color: #131021;
+    color: #e2d9f3;
+    border: 1px solid #3b2d54;
+    padding: 4px;
+}
+
+#tray menu menuitem {
+    background-color: transparent;
+    color: #e2d9f3;
+    padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+    background-color: #292240;
+    color: #ffffff;
+}
+
+#custom-clipboard {
+    font-size: 19px;
+    padding: 0 14px;
+    color: #aabaef;
+    background-color: #131021;
+    border-radius: 12px;
+    border: 1px solid #292240;
+}
+
+#custom-clipboard:hover {
+    color: #d0bfff;
+}
+
+/* Workspaces styling for Niri */
+#workspaces button {
+    padding: 0 8px;
+    color: #524868;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #bf94ff;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #ffffff;
+}
+
+/* Module accent colors */
+#clock {
+    color: #d0bfff;
+}
+
+#cpu {
+    color: #8be9fd;
+}
+
+#memory {
+    color: #ff79c6;
+}
+
+/* Audio Output & Microphone */
+#pulseaudio {
+    color: #bd93f9;
+}
+
+#pulseaudio.source {
+    color: #aabaef;
+}
+
+#pulseaudio:not(.source).muted {
+    color: #443b5a;
+}
+
+#pulseaudio.source.source-muted {
+    color: #443b5a;
+}
+
+#network {
+    color: #8be9fd;
+}
+
+#network.disconnected {
+    color: #ff5577;
+}
+
+#custom-power {
+    font-size: 20px;
+    padding: 0 18px;
+    color: #ff5577;
+    background-color: #131021;
+    border-radius: 12px;
+    border: 1px solid #292240;
+}
+
+#custom-power:hover {
+    color: #ff6e8b;
+}
+
+#custom-language {
+    padding: 0 16px;
+    color: #d8cfea;
+    background-color: #131021;
+    border-radius: 12px;
+    border: 1px solid #292240;
+}
+
+#custom-language:hover {
+    color: #ffffff;
+}
+
+#custom-themes {
+    font-size: 20px;
+    padding: 0 16px;
+    color: #bf94ff;
+    background-color: #131021;
+    border-radius: 12px;
+    border: 1px solid #292240;
+}
+
+#custom-themes:hover {
+    color: #d0bfff;
+}
+
+#window {
+    color: #e2d9f3;
+    font-weight: normal;
+}

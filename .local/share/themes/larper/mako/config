@@ -1,0 +1,10 @@
+[mode=default]
+default-timeout=5000
+ignore-timeout=1
+
+font=Hack Nerd Font Mono 11
+background-color=#0b0a12e6
+text-color=#e2d9f3
+border-color=#bf94ff
+border-size=2
+border-radius=8
