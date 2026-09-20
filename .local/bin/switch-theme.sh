@@ -20,6 +20,13 @@ if [ -d "$TARGET_DIR" ]; then
     [ -f "$TARGET_DIR/fuzzel.ini" ] && cp "$TARGET_DIR/fuzzel.ini" "$HOME/.config/fuzzel/fuzzel.ini"
     [ -f "$TARGET_DIR/alacritty.toml" ] && cp "$TARGET_DIR/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
+    # Copy Waybar config/config.jsonc if present
+    if [ -f "$TARGET_DIR/config" ]; then
+        cp "$TARGET_DIR/config" "$HOME/.config/waybar/config"
+    elif [ -f "$TARGET_DIR/config.jsonc" ]; then
+        cp "$TARGET_DIR/config.jsonc" "$HOME/.config/waybar/config.jsonc"
+    fi
+
     # Copy Mako config & reload
     if [ -f "$TARGET_DIR/mako/config" ]; then
         mkdir -p "$HOME/.config/mako"
@@ -27,16 +34,24 @@ if [ -d "$TARGET_DIR" ]; then
         makoctl reload
     fi
 
-    # Set wallpaper using awww if wallpaper directory/file exists
+    # Array of transitions
+    TRANSITIONS=("fade" "left" "right" "top" "bottom" "wipe" "wave" "outer")
+    RANDOM_TRANSITION=${TRANSITIONS[$RANDOM % ${#TRANSITIONS[@]}]}
+
+    # Set wallpaper using awww
     if [ -d "$TARGET_DIR/wallpaper" ]; then
         WALLPAPER=$(find "$TARGET_DIR/wallpaper" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" -o -iname "*.gif" \) | head -n 1)
 
         if [ -n "$WALLPAPER" ]; then
-            awww img "$WALLPAPER"
+            awww img "$WALLPAPER" \
+                --transition-type "$RANDOM_TRANSITION" \
+                --transition-fps 60 \
+                --transition-step 90 \
+		--transition-duration 1.3
         fi
     fi
 
-    # Overwrite isolated theme-colors.kdl directly (Zero risk to main config)
+    # Overwrite isolated theme-colors.kdl directly
     if [ -f "$TARGET_DIR/active-color.txt" ]; then
         COLOR_LINE=$(tr -d '\r\n' < "$TARGET_DIR/active-color.txt")
 
@@ -49,8 +64,14 @@ layout {
 EOF
     fi
 
-    # Gracefully reload Waybar
-    pkill waybar && waybar &
+    # Cleanly terminate Waybar AND its lingering layout helper processes
+    pkill -f "waybar-niri-layout.sh"
+    pkill -f "niri msg --json event-stream"
+    pkill waybar
+
+    # Brief pause to ensure sockets detach cleanly before spawning a new instance
+    sleep 0.1
+    waybar &
 
     notify-send "Theme Switched" "Applied theme: $chosen"
 else

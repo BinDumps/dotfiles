@@ -23,8 +23,8 @@ nmcli dev wifi rescan 2>/dev/null
 
 # Format list of available Wi-Fi networks: [SIGNAL%] SSID
 WIFI_LIST=$(nmcli -f SIGNAL,SSID,SECURITY dev wifi list | sed 1d | awk 'NF>0 {
-    sig=$1 "%";
-    $1="";
+    sig=$1 "%"; 
+    $1=""; 
     printf " %4s  %s\n", sig, $0
 }' | sort -u -k2)
 
@@ -36,7 +36,7 @@ CHOSEN=$(echo -e "$WIFI_LIST" | fuzzel --dmenu --prompt="Wi-Fi: " -l 10 -w 50)
 # Parse selected SSID
 SELECTED_SSID=$(echo "$CHOSEN" | awk '{
     for(i=2; i<=NF; i++) {
-        if ($i ~ /\*/ || $i ~ /WPA/ || $i ~ /WEP/ || $i ~ /802.1X/ || $i ~ /--/) exit;
+        if ($i ~ /\*/ || $i ~ /WPA/ || $i ~ /WEP/ || $i ~ /802.1X/ || $i ~ /--/) exit; 
         printf "%s ", $i
     }
 }' | sed 's/ $//')

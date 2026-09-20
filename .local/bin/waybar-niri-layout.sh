@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Kill all background job processes on script exit
+trap 'kill $(jobs -p) 2>/dev/null' EXIT INT TERM
+
 # Dynamically parse any layout name into a clean 2-letter uppercase code
 format_code() {
     local raw_name="$1"
@@ -24,8 +27,8 @@ else
     echo "EN"
 fi
 
-# 2. Listen to Niri event stream
-niri msg --json event-stream 2>/dev/null | while read -r line; do
+# 2. Listen to Niri event stream using Process Substitution
+while read -r line; do
     if echo "$line" | grep -q "KeyboardLayoutsChanged"; then
         mapfile -t LAYOUT_NAMES < <(echo "$line" | jq -r '.KeyboardLayoutsChanged.keyboard_layouts.names[]')
         CURRENT_IDX=$(echo "$line" | jq -r '.KeyboardLayoutsChanged.keyboard_layouts.current_idx // 0')
@@ -35,4 +38,4 @@ niri msg --json event-stream 2>/dev/null | while read -r line; do
         NEW_IDX=$(echo "$line" | jq -r '.KeyboardLayoutSwitched.idx // 0')
         format_code "${LAYOUT_NAMES[$NEW_IDX]}"
     fi
-done
+done < <(exec niri msg --json event-stream 2>/dev/null)
