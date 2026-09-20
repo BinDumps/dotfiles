@@ -91,12 +91,23 @@ window#waybar {
     color: #ebcb8b;
 }
 
+/* Active / Normal States */
 #pulseaudio {
-    color: #b48ead;
+    color: #ffffff; /* Or your active accent color */
 }
 
-#pulseaudio.muted {
-    color: #4c566a;
+#pulseaudio.source {
+    color: #ffffff;
+}
+
+/* Speaker Output Muted (Only affects main speaker module) */
+#pulseaudio:not(.source).muted {
+    color: #555555;
+}
+
+/* Microphone Input Muted (Only affects mic module) */
+#pulseaudio.source.source-muted {
+    color: #555555;
 }
 
 #network {
