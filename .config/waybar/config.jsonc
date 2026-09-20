@@ -20,13 +20,13 @@
         "cpu",
         "memory",
         "pulseaudio",
-	"pulseaudio#source",
-	"backlight",
+		"pulseaudio#source",
+		"backlight",
         "network",
-	"custom/language",
-	"custom/clipboard",
-	"custom/themes",
-	"custom/power"
+		"custom/language",
+		"custom/clipboard",
+		"custom/themes",
+		"custom/power"
     ],
 
     "niri/workspaces": {
