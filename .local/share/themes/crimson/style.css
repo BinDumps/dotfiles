@@ -90,11 +90,21 @@ window#waybar {
     color: #ff80ab;
 }
 
+/* Speaker Output */
 #pulseaudio {
     color: #ea80fc;
 }
 
-#pulseaudio.muted {
+#pulseaudio:not(.source).muted {
+    color: #661e2c;
+}
+
+/* Microphone Input */
+#pulseaudio.source {
+    color: #ea80fc;
+}
+
+#pulseaudio.source.source-muted {
     color: #661e2c;
 }
 
