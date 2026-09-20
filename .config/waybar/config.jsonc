@@ -125,7 +125,7 @@
         "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
         "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
         "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
-	"on-click": "~/.local/bin/waybar-network-menu.sh"
+		"on-click": "~/.local/bin/waybar-network-menu.sh"
     },
 
     "custom/language": {
