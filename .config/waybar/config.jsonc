@@ -10,23 +10,23 @@
 
     "modules-left": [
         "niri/workspaces",
-        "niri/window"
+        "niri/window",
+        "tray"
     ],
     "modules-center": [
         "clock"
     ],
     "modules-right": [
-        "tray",
         "cpu",
         "memory",
         "pulseaudio",
-		"pulseaudio#source",
-		"backlight",
-        "network",
-		"custom/language",
-		"custom/clipboard",
-		"custom/themes",
-		"custom/power"
+	"pulseaudio#source",
+	"backlight",
+    "network",
+	"custom/language",
+	"custom/clipboard",
+	"custom/themes",
+	"custom/power"
     ],
 
     "niri/workspaces": {
@@ -109,11 +109,11 @@
     },
 
     "backlight": {
-	    "format": "{icon} {percent}%",
-		"format-icons": ["󰃞", "󰃟", "󰃠"],
-		"on-scroll-up": "brightnessctl set 5%+",
-		"on-scroll-down": "brightnessctl set 5%-",
-		"tooltip": false
+	"format": "{icon} {percent}%",
+	"format-icons": ["󰃞", "󰃟", "󰃠"],
+	"on-scroll-up": "brightnessctl set 5%+",
+	"on-scroll-down": "brightnessctl set 5%-",
+	"tooltip": false
     },
 
     "network": {
@@ -125,7 +125,7 @@
         "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
         "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
         "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
-		"on-click": "~/.local/bin/waybar-network-menu.sh"
+	"on-click": "~/.local/bin/waybar-network-menu.sh"
     },
 
     "custom/language": {
