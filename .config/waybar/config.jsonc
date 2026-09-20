@@ -9,6 +9,7 @@
     "spacing": 8,
 
     "modules-left": [
+	"custom/themes",
         "niri/workspaces",
         "niri/window",
         "tray"
@@ -20,13 +21,12 @@
         "cpu",
         "memory",
         "pulseaudio",
-		"pulseaudio#source",
-		"backlight",
-    	"network",
-		"custom/language",
-		"custom/clipboard",
-		"custom/themes",
-		"custom/power"
+	"pulseaudio#source",
+	"backlight",
+        "network",
+	"custom/language",
+	"custom/clipboard",
+	"custom/power"
     ],
 
     "niri/workspaces": {
@@ -47,7 +47,8 @@
     },
 
     "clock": {
-	"format": "󰥔 {:%I:%M %p}",
+	"interval": 1,
+        "format": "󰥔 {:%I:%M:%S %p}",
         "format-alt": "󰃭 {:%A, %B %d, %Y}",
         "tooltip-format": "<span size='14000'><b>{:%B %Y}</b></span>\n\n<tt><span size='11000'>{calendar}</span></tt>",
         "calendar": {
@@ -109,11 +110,11 @@
     },
 
     "backlight": {
-		"format": "{icon} {percent}%",
-		"format-icons": ["󰃞", "󰃟", "󰃠"],
-		"on-scroll-up": "brightnessctl set 5%+",
-		"on-scroll-down": "brightnessctl set 5%-",
-		"tooltip": false
+	"format": "{icon} {percent}%",
+	"format-icons": ["󰃞", "󰃟", "󰃠"],
+	"on-scroll-up": "brightnessctl set 5%+",
+	"on-scroll-down": "brightnessctl set 5%-",
+	"tooltip": false
     },
 
     "network": {
@@ -125,7 +126,7 @@
         "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
         "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
         "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
-		"on-click": "~/.local/bin/waybar-network-menu.sh"
+	"on-click": "~/.local/bin/waybar-network-menu.sh"
     },
 
     "custom/language": {
@@ -136,7 +137,7 @@
     },
 
     "tray": {
-        "icon-size": 14,
+        "icon-size": 16,
         "spacing": 10
     },
 
@@ -145,12 +146,12 @@
         "on-click": "switch-theme",
         "tooltip": true,
         "tooltip-format": "Switch system theme",
-		"on-click": "~/.local/bin/switch-theme.sh"
+	"on-click": "~/.local/bin/switch-theme.sh"
     },
 
     "custom/power": {
-		"format": "󰐥",
-		"tooltip": false,
-		"on-click": "~/.local/bin/waybar-powermenu.sh"
+	"format": "󰐥",
+	"tooltip": false,
+	"on-click": "~/.local/bin/waybar-powermenu.sh"
     }
 }
