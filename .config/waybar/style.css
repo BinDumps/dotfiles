@@ -93,12 +93,12 @@ window#waybar {
 
 /* Speaker Output (Active State) */
 #pulseaudio {
-    color: #ffffff; /* Speakers active color (e.g., #ffffff, #ff1744, etc.) */
+    color: #b48ead; /* Speakers active color (e.g., #ffffff, #ff1744, etc.) */
 }
 
 /* Microphone Input (Active State - Set your theme color here) */
 #pulseaudio.source {
-    color: #e040fb; /* Microphone active color (e.g., purple) */
+    color: #b48ead; /* Microphone active color (e.g., purple) */
 }
 
 /* Speaker Output Muted ONLY */
