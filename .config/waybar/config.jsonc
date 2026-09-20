@@ -43,7 +43,7 @@
     	"format": "󰅍",
     	"tooltip-format": "Clipboard History",
     	"on-click": "~/.local/bin/cliphist-fuzzel.sh",
-    	"on-click-right": "cliphist wipe && notify-send 'Clipboard Cleared'"
+    	"on-click-right": "cliphist wipe && wl-copy -c && notify-send 'Clipboard Cleared'"
     },
 
     "clock": {
