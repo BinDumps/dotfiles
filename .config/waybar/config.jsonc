@@ -109,11 +109,11 @@
     },
 
     "backlight": {
-	"format": "{icon} {percent}%",
-	"format-icons": ["󰃞", "󰃟", "󰃠"],
-	"on-scroll-up": "brightnessctl set 5%+",
-	"on-scroll-down": "brightnessctl set 5%-",
-	"tooltip": false
+		"format": "{icon} {percent}%",
+		"format-icons": ["󰃞", "󰃟", "󰃠"],
+		"on-scroll-up": "brightnessctl set 5%+",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": false
     },
 
     "network": {
@@ -125,7 +125,7 @@
         "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
         "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
         "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
-	"on-click": "~/.local/bin/waybar-network-menu.sh"
+		"on-click": "~/.local/bin/waybar-network-menu.sh"
     },
 
     "custom/language": {
@@ -145,12 +145,12 @@
         "on-click": "switch-theme",
         "tooltip": true,
         "tooltip-format": "Switch system theme",
-	"on-click": "~/.local/bin/switch-theme.sh"
+		"on-click": "~/.local/bin/switch-theme.sh"
     },
 
     "custom/power": {
-	"format": "󰐥",
-	"tooltip": false,
-	"on-click": "~/.local/bin/waybar-powermenu.sh"
+		"format": "󰐥",
+		"tooltip": false,
+		"on-click": "~/.local/bin/waybar-powermenu.sh"
     }
 }
