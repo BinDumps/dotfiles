@@ -2,6 +2,7 @@
 
 THEME_DIR="$HOME/.local/share/themes"
 NIRI_THEME_FILE="$HOME/.config/niri/theme-colors.kdl"
+NIRI_ADDITIONAL="$HOME/.config/niri/custom.kdl"
 
 # If an argument is passed directly, use it. Otherwise, use Fuzzel to pick one!
 if [ -n "$1" ]; then
@@ -62,6 +63,12 @@ layout {
     }
 }
 EOF
+    fi
+
+    if [ -f "$TARGET_DIR/custom.kdl" ]; then
+	    cat "$TARGET_DIR/custom.kdl" > $NIRI_ADDITIONAL
+    else
+	    echo "" > $NIRI_ADDITIONAL
     fi
 
     # Cleanly terminate Waybar AND its lingering layout helper processes
