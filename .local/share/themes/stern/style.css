@@ -53,9 +53,13 @@ window#waybar > box {
 }
 
 #tray,
-#clock,
 #window {
     padding: 0px 14px;
+}
+
+#clock {
+    font-size: 15px;	
+    padding: 0px 13px;
 }
 
 #custom-clipboard {
@@ -159,4 +163,3 @@ window#waybar > box {
     color: #dddddd;
     font-weight: normal;
 }
-
