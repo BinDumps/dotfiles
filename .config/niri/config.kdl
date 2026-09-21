@@ -7,6 +7,7 @@
 // Find the full list of options on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Input
 include optional=true "theme-colors.kdl"
+include optional=true "custom.kdl"
 input {
     keyboard {
         xkb {
@@ -652,10 +653,13 @@ binds {
     Mod+Alt+L { spawn "hyprlock"; }
     // spawn waypaper
     Mod+Shift+W { spawn "waypaper"; }
+    // spawn ghostty
+    Mod+Return { spawn "env" "__NV_PRIME_RENDER_OFFLOAD=1" "__VK_LAYER_NV_optimus=NVIDIA_only" "__GLX_VENDOR_LIBRARY_NAME=nvidia" "ghostty"; }
 }
 
 window-rule {
     match app-id="Alacritty"
+    match app-id="com.mitchellh.ghostty"
     // Disables painting a solid background tile beneath Alacritty
     draw-border-with-background false
     background-effect {
@@ -673,3 +677,4 @@ environment {
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "GTK_THEME=Adwaita:dark" "XDG_CURRENT_DESKTOP=niri"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Adwaita-dark"
+
