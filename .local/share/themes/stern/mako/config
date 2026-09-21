@@ -4,5 +4,5 @@ ignore-timeout=1
 font=Monospace 11
 background-color=#050505e6
 text-color=#ffffff
-border-color=#ffffff
+border-color=#c0c0c0
 border-size=2
