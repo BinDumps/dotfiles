@@ -273,11 +273,11 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
 // Spawn swayidle on startup and lock the screen after 5 minutes of inactivity
-spawn-at-startup "swayidle" "-w" \
-    "timeout" "300" "hyprlock" \
-    "timeout" "200" "niri msg action power-off-monitors" \
-    "resume" "niri msg action power-on-monitors" \
-    "before-sleep" "hyprlock"
+// spawn-at-startup "swayidle" "-w" \
+//     "timeout" "300" "hyprlock" \
+//     "timeout" "200" "niri msg action power-off-monitors" \
+//     "resume" "niri msg action power-on-monitors" \
+//     "before-sleep" "hyprlock"
 // Clipboard manager
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
