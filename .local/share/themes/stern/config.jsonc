@@ -7,8 +7,9 @@
     "modules-left": [
 	"custom/privacy",
         "niri/workspaces",
-        "niri/window",
-        "tray"
+		"tray",
+        "niri/window"
+        
     ],
     "modules-center": [
         "clock"
