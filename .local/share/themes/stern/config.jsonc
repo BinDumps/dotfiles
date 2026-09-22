@@ -9,7 +9,6 @@
         "niri/workspaces",
 		"tray",
         "niri/window"
-        
     ],
     "modules-center": [
         "clock"
