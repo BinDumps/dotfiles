@@ -274,10 +274,10 @@ layout {
 spawn-at-startup "waybar"
 // Spawn swayidle on startup and lock the screen after 5 minutes of inactivity
 // spawn-at-startup "swayidle" "-w" \
-//     "timeout" "300" "hyprlock" \
-//     "timeout" "200" "niri msg action power-off-monitors" \
-//     "resume" "niri msg action power-on-monitors" \
-//     "before-sleep" "hyprlock"
+//    "timeout" "300" "hyprlock" \
+//    "timeout" "200" "niri msg action power-off-monitors" \
+//    "resume" "niri msg action power-on-monitors" \
+//    "before-sleep" "hyprlock"
 // Clipboard manager
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
@@ -674,7 +674,4 @@ environment {
     QT_QPA_PLATFORMTHEME "gtk3"
 }
 
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "GTK_THEME=Adwaita:dark" "XDG_CURRENT_DESKTOP=niri"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Adwaita-dark"
-
