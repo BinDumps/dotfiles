@@ -5,7 +5,7 @@
     "spacing": 8,
 
     "modules-left": [
-	"custom/privacy",
+		"custom/privacy",
         "niri/workspaces",
 		"tray",
         "niri/window"
