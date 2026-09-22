@@ -5,6 +5,7 @@
     "spacing": 8,
 
     "modules-left": [
+	"custom/privacy",
         "custom/themes",
         "niri/workspaces",
         "niri/window",
@@ -144,10 +145,18 @@
         "tooltip-format": "Switch system theme",
         "on-click": "~/.local/bin/switch-theme.sh"
     },
-
+	    
     "custom/power": {
         "format": "󰐥",
         "tooltip": false,
         "on-click": "~/.local/bin/waybar-powermenu.sh"
-    }
+    },
+
+    "custom/privacy": {
+        "exec": "~/.local/bin/privacy-dots.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "~/.local/bin/privacy-menu.sh"
+    } 
 }
