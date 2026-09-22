@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
-# Kill all background job processes on script exit
-trap 'kill $(jobs -p) 2>/dev/null' EXIT INT TERM
+# --- Self-Deduplication: Kill any existing instances of this exact script ---
+MY_PID=$$
+for pid in $(pgrep -f "waybar-niri-layout.sh" 2>/dev/null || true); do
+    if [ "$pid" -ne "$MY_PID" ]; then
+        kill -9 "$pid" 2>/dev/null || true
+    fi
+done
 
-# Dynamically parse any layout name into a clean 2-letter uppercase code
+# Terminate spawned background streams when process exits
+trap 'pkill -P $$ 2>/dev/null; exit' EXIT INT TERM
+
 format_code() {
     local raw_name="$1"
 
-    # 1. If layout name has code in parentheses like "English (US)", extract "US"
     if [[ "$raw_name" =~ \(([A-Za-z]{2})\) ]]; then
         echo "${BASH_REMATCH[1]}" | tr '[:lower:]' '[:upper:]'
         return
     fi
 
-    # 2. Otherwise, take the first 2 letters of the layout name (e.g., "Russian" -> "RU")
     echo "$raw_name" | sed -E 's/[^a-zA-Z]//g' | cut -c1-2 | tr '[:lower:]' '[:upper:]'
 }
 
@@ -27,8 +32,8 @@ else
     echo "EN"
 fi
 
-# 2. Listen to Niri event stream using Process Substitution
-while read -r line; do
+# 2. Listen to Niri event stream using native PipeWire/Niri IPC stream
+exec niri msg --json event-stream 2>/dev/null | while read -r line; do
     if echo "$line" | grep -q "KeyboardLayoutsChanged"; then
         mapfile -t LAYOUT_NAMES < <(echo "$line" | jq -r '.KeyboardLayoutsChanged.keyboard_layouts.names[]')
         CURRENT_IDX=$(echo "$line" | jq -r '.KeyboardLayoutsChanged.keyboard_layouts.current_idx // 0')
@@ -38,4 +43,4 @@ while read -r line; do
         NEW_IDX=$(echo "$line" | jq -r '.KeyboardLayoutSwitched.idx // 0')
         format_code "${LAYOUT_NAMES[$NEW_IDX]}"
     fi
-done < <(exec niri msg --json event-stream 2>/dev/null)
+done
