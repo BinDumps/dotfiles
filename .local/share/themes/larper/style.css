@@ -29,6 +29,7 @@ window#waybar > box {
 #pulseaudio.source,
 #backlight,
 #network,
+#custom-privacy,
 #tray {
     padding: 0px 14px;
     background-color: #131021;

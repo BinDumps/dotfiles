@@ -9,6 +9,7 @@
     "spacing": 4,
 
     "modules-left": [
+	"custom/privacy",
         "custom/power",
         "custom/themes",
         "niri/workspaces",
@@ -141,5 +142,13 @@
         "format": "󰐥",
         "tooltip": false,
         "on-click": "~/.local/bin/waybar-powermenu.sh"
+    },
+
+    "custom/privacy": {
+        "exec": "~/.local/bin/privacy-dots.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "~/.local/bin/privacy-menu.sh"
     }
 }

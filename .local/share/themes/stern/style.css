@@ -26,7 +26,6 @@ window#waybar > box {
 #pulseaudio,
 #pulseaudio.source,
 #backlight,
-#privacy,
 #network {
     padding: 0px 14px;
     background-color: #111111;
@@ -61,6 +60,10 @@ window#waybar > box {
 #clock {
     font-size: 15px;	
     padding: 0px 13px;
+}
+
+#custom-privacy {
+    padding: 0px 4px;
 }
 
 #custom-clipboard {
@@ -130,7 +133,7 @@ window#waybar > box {
 
 #custom-power {
     font-size: 20px;
-    padding: 0 18px;
+    padding: 0 14px;
     color: #ffffff;
 }
 
@@ -152,7 +155,7 @@ window#waybar > box {
 
 #custom-themes {
     font-size: 20px;
-    padding: 0 16px;
+    padding: 0 14px;
     color: #ffffff;
 }
 

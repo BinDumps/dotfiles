@@ -6,7 +6,6 @@
 
     "modules-left": [
 	"custom/privacy",
-        "custom/themes",
         "niri/workspaces",
         "niri/window",
         "tray"
@@ -23,6 +22,7 @@
         "network",
         "custom/language",
         "custom/clipboard",
+        "custom/themes",
         "custom/power"
     ],
 
