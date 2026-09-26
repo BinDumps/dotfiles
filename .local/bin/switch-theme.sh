@@ -20,6 +20,16 @@ if [ -d "$TARGET_DIR" ]; then
     [ -f "$TARGET_DIR/style.css" ] && cp "$TARGET_DIR/style.css" "$HOME/.config/waybar/style.css"
     [ -f "$TARGET_DIR/fuzzel.ini" ] && cp "$TARGET_DIR/fuzzel.ini" "$HOME/.config/fuzzel/fuzzel.ini"
     [ -f "$TARGET_DIR/alacritty.toml" ] && cp "$TARGET_DIR/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+    [ -f "$TARGET_DIR/fonts.conf" ] && cp "$TARGET_DIR/fonts.conf" "$HOME/.config/waybar/fonts.conf"
+
+    # Manage user fonts dynamically
+    if [ -d "$TARGET_DIR/fonts" ]; then
+        mkdir -p "$HOME/.local/share/fonts/custom-theme"
+        rm -rf "$HOME/.local/share/fonts/custom-theme/"*
+        cp -r "$TARGET_DIR/fonts/"* "$HOME/.local/share/fonts/custom-theme/"
+    else
+        rm -rf "$HOME/.local/share/fonts/custom-theme/"* 2>/dev/null
+    fi
 
     # Copy Waybar config/config.jsonc if present
     if [ -f "$TARGET_DIR/config" ]; then
@@ -35,6 +45,41 @@ if [ -d "$TARGET_DIR" ]; then
         makoctl reload
     fi
 
+    # Manage GTK 3 & 4 fonts (Apply theme font or revert to system defaults)
+    if [ -f "$TARGET_DIR/font.txt" ] && [ -s "$TARGET_DIR/font.txt" ]; then
+        GTK_FONT=$(tr -d '\r\n' < "$TARGET_DIR/font.txt")
+
+        # Update live gsettings
+        if command -v gsettings >/dev/null 2>&1; then
+            gsettings set org.gnome.desktop.interface font-name "$GTK_FONT"
+            gsettings set org.gnome.desktop.interface monospace-font-name "$GTK_FONT"
+        fi
+
+        # Update GTK 3 & GTK 4 settings.ini safely
+        for dir in "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"; do
+            mkdir -p "$dir"
+            if [ -f "$dir/settings.ini" ]; then
+                sed -i '/^gtk-font-name=/d' "$dir/settings.ini"
+                # Ensure newline before appending
+                [ -n "$(tail -c 1 "$dir/settings.ini")" ] && echo "" >> "$dir/settings.ini"
+            fi
+            echo "gtk-font-name=$GTK_FONT" >> "$dir/settings.ini"
+        done
+    else
+        # Fallback: Reset gsettings to defaults
+        if command -v gsettings >/dev/null 2>&1; then
+            gsettings reset org.gnome.desktop.interface font-name
+            gsettings reset org.gnome.desktop.interface monospace-font-name
+        fi
+
+        # Clean override lines from settings.ini
+        for dir in "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"; do
+            if [ -f "$dir/settings.ini" ]; then
+                sed -i '/^gtk-font-name=/d' "$dir/settings.ini"
+            fi
+        done
+    fi
+
     # Array of transitions
     TRANSITIONS=("fade" "left" "right" "top" "bottom" "wipe" "wave" "outer")
     RANDOM_TRANSITION=${TRANSITIONS[$RANDOM % ${#TRANSITIONS[@]}]}
@@ -48,7 +93,7 @@ if [ -d "$TARGET_DIR" ]; then
                 --transition-type "$RANDOM_TRANSITION" \
                 --transition-fps 60 \
                 --transition-step 90 \
-		--transition-duration 1.3
+                --transition-duration 1.3
         fi
     fi
 
@@ -66,9 +111,9 @@ EOF
     fi
 
     if [ -f "$TARGET_DIR/custom.kdl" ]; then
-	    cat "$TARGET_DIR/custom.kdl" > $NIRI_ADDITIONAL
+        cat "$TARGET_DIR/custom.kdl" > "$NIRI_ADDITIONAL"
     else
-	    echo "" > $NIRI_ADDITIONAL
+        echo "" > "$NIRI_ADDITIONAL"
     fi
 
     # Cleanly terminate Waybar AND its lingering layout helper processes
