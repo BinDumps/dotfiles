@@ -1,0 +1,9 @@
+[mode=default]
+default-timeout=5000
+ignore-timeout=1
+font=Perfect DOS VGA 437 13
+background-color=#0000ffff
+padding=5
+text-color=#ffffff
+border-color=#c0c0c0
+border-size=1

@@ -1,0 +1,164 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Segoe UI;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+    border: none;
+}
+
+window#waybar > box {
+    /* border: 1px solid #121021; */
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 6px 10px;
+    color: #e2d9f3;
+}
+
+/* Individual Module Pills */
+#workspaces,
+#cpu,
+#memory,
+#pulseaudio,
+#pulseaudio.source,
+#backlight,
+#custom-language,
+#custom-clipboard,
+#custom-power,
+#custom-themes,
+#network {
+    padding: 0px 8px;
+    background-color: #222222;
+    border-radius: 8px;
+    border: 1px solid #111111;
+}
+
+/* Fix Waybar Tray Context Menus */
+#tray menu {
+    background-color: #111111;
+    color: #ffffff;
+    border: 1px solid #c0c0c0;
+    padding: 4px;
+}
+
+#tray menu menuitem {
+    background-color: transparent;
+    color: #cccccc;
+    padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+#tray,
+#window {
+    padding: 0px 16px;
+}
+
+#clock {
+    font-size: 15px;	
+    font-weight: normal;
+    padding: 0px 4px 0px 12px;
+    -gtk-icon-transform: none;
+}
+
+#custom-privacy {
+    padding: 0px 4px;
+}
+
+#custom-clipboard {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#custom-clipboard:hover {
+    color: #888888;
+}
+
+/* Workspaces styling for Niri */
+#workspaces button {
+    padding: 0 8px;
+    color: #555555;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #cccccc;
+}
+
+/* Module accent colors (Grayscale Hierarchy) */
+#clock {
+    color: #ffffff;
+}
+
+#cpu {
+    color: #dddddd;
+}
+
+#memory {
+    color: #bbbbbb;
+}
+
+/* Speaker Output */
+#pulseaudio {
+    color: #ffffff;
+}
+
+#pulseaudio:not(.source).muted {
+    color: #555555;
+}
+
+/* Microphone Input */
+#pulseaudio.source {
+    color: #ffffff;
+}
+
+#pulseaudio.source.source-muted {
+    color: #555555;
+}
+
+#network {
+    color: #cccccc;
+}
+
+#network.disconnected {
+    color: #666666;
+}
+
+#custom-power {
+    font-size: 20px;
+    padding: 0px 16px;
+}
+
+#custom-power:hover {
+    color: #888888;
+}
+
+#custom-language:hover {
+    color: #ffffff;
+}
+
+#custom-themes {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#custom-themes:hover {
+    color: #888888;
+}
+
+#window {
+    color: #dddddd;
+    font-weight: normal;
+}

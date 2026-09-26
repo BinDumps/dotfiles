@@ -1,0 +1,8 @@
+layer-rule {
+    match namespace="waybar"
+        background-effect {
+            xray false
+            blur true
+            noise 0.03
+        }
+}

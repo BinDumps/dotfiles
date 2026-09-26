@@ -1,0 +1,162 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 36,
+    "spacing": 8,
+
+    "modules-left": [
+        "custom/power",
+        "niri/workspaces",
+        "niri/window"
+    ],
+    "modules-center": [
+	"custom/privacy"
+    ],
+    "modules-right": [
+	"tray",
+        "cpu",
+        "memory",
+        "pulseaudio",
+        "pulseaudio#source",
+        "backlight",
+        "network",
+        "custom/language",
+        "custom/clipboard",
+        "custom/themes",
+        "clock"
+    ],
+
+    "niri/workspaces": {
+        "format": "{index}",
+        "active-only": false
+    },
+
+    "niri/window": {
+        "format": "{}",
+        "max-length": 40,
+	"ellipsis": true,
+        "separate-outputs": true
+    },
+
+    "custom/clipboard": {
+        "format": "󰅍",
+        "tooltip-format": "Clipboard History",
+        "on-click": "~/.local/bin/cliphist-fuzzel.sh",
+        "on-click-right": "cliphist wipe && wl-copy -c && notify-send 'Clipboard Cleared'"
+    },
+
+    "clock": {
+	"format": "{:%I:%M %p\n%m-%d-%Y}",
+        "tooltip-format": "<span size='14000'><b>{:%B %Y}</b></span>\n\n<tt><span size='11000'>{calendar}</span></tt>",
+	"justify": "right",
+        "align": 1,
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#bf94ff'><b>{}</b></span>",
+                "days": "<span color='#e2d9f3'><b>{}</b></span>",
+                "weekdays": "<span color='#aabaef'><b>{}</b></span>",
+                "today": "<span color='#ff79c6'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "󰘚 {percentage}%",
+        "interval": 3
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "pulseaudio#source": {
+        "format": "{format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭 Muted",
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "tooltip": false
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰤭 Disconnected",
+        "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
+        "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
+        "on-click": "~/.local/bin/waybar-network-menu.sh"
+    },
+
+    "custom/language": {
+        "exec": "~/.local/bin/waybar-niri-layout.sh",
+        "format": "󰌌 {}",
+        "tooltip": false,
+        "on-click": "niri msg action switch-layout next"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "custom/themes": {
+        "format": "󰔎",
+        "tooltip": true,
+        "tooltip-format": "Switch system theme",
+        "on-click": "~/.local/bin/switch-theme.sh"
+    },
+	    
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "~/.local/bin/waybar-powermenu.sh"
+    },
+
+    "custom/privacy": {
+        "exec": "~/.local/bin/privacy-dots.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "~/.local/bin/privacy-menu.sh"
+    } 
+}

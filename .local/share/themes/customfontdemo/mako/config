@@ -1,0 +1,8 @@
+[mode=default]
+default-timeout=5000
+ignore-timeout=1
+font=DepartureMono Nerd Font Mono 11
+background-color=#050505e6
+text-color=#ffffff
+border-color=#c0c0c0
+border-size=2

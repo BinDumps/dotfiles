@@ -1,0 +1,62 @@
+[font]
+size = 17.0
+
+[font.offset]
+x = 0
+y = 2  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
+
+[font.bold]
+family = "PxPlus IBM VGA8"
+style = "Bold"
+
+[font.italic]
+family = "PxPlus IBM VGA8"
+style = "Italic"
+
+[font.normal]
+family = "PxPlus IBM VGA8"
+style = "Regular"
+
+[window]
+padding = { x = 12, y = 12 }
+opacity = 0.75
+blur = true
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+cursor = "#ffffff"
+text = "#000000"
+
+[colors.selection]
+background = "#545454"
+text = "#ffffff"
+
+# Regular Colors (0-7)
+[colors.bright]
+black   = "#c0c0c0"
+red     = "#800000"
+green   = "#008000"
+yellow  = "#808000"
+blue    = "#000080"
+magenta = "#800080"
+cyan    = "#008080"
+white   = "#c0c0c0"
+
+# Intense/Bright Colors (8-15)
+[colors.normal]
+black   = "#c0c0c0"
+red     = "#ff0000"
+green   = "#00ff00"
+yellow  = "#ffff00"
+blue    = "#0000ff"
+magenta = "#ff00ff"
+cyan    = "#00ffff"
+white   = "#ffffff"
+
+[[keyboard.bindings]]
+key = "F11"
+mods = "None"
+action = "ToggleFullscreen"
