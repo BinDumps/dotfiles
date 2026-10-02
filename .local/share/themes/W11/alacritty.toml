@@ -3,7 +3,7 @@ size = 15.0
 
 [font.offset]
 x = 0
-y = 4  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
+y = 5  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
 
 [font.bold]
 family = "Lucida Console"
