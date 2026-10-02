@@ -59,7 +59,7 @@ window#waybar > box {
 
 /* Windows Start Button */
 #custom-start {
-    font-size: 32px;
+    font-size: 37px;
     color: #00a4ef;
     padding: 0px 12px;
 }
@@ -81,7 +81,7 @@ window#waybar > box {
 
 #workspaces button {
     font-size: 15px;
-    padding: 0px 12px;
+    padding: 0px 8px;
     margin: 0 2px;
     color: #888888;
     background: transparent;
@@ -125,7 +125,7 @@ window#waybar > box {
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px;
-    padding: 6px;
+    padding: 4px;
 }
 
 #tray menu menuitem {
@@ -144,4 +144,16 @@ window#waybar > box {
     color: rgba(255, 255, 255, 0.35);
     font-size: 13px;                  
     padding: 0 6px;
+}
+
+#cpu,
+#memory {
+    font-weight: normal;
+    padding: 6px;
+}
+
+#window label {
+    font-weight: normal;
+    font-size: 15px;
+    padding: 4px;
 }

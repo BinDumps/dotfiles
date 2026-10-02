@@ -3,18 +3,18 @@ size = 15.0
 
 [font.offset]
 x = 0
-y = 5  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
+y = 2  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
 
 [font.bold]
-family = "Lucida Console"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "Lucida Console"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "Lucida Console"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "Regular"
 
 [window]
@@ -24,39 +24,42 @@ blur = true
 
 [colors.primary]
 background = "#000000"
-foreground = "#ffffff"
+foreground = "#E0E0E0"
 
 [colors.cursor]
-cursor = "#ffffff"
+cursor = "#FFFFFF"
 text = "#000000"
 
 [colors.selection]
-background = "#545454"
-text = "#ffffff"
+background = "#FFFFFF"
+text = "#000000"
 
-# Regular Colors (0-7) — Lifted for readability
+# Normal Colors
 [colors.normal]
 black   = "#000000"
-red     = "#ff4444"
-green   = "#44ff44"
-yellow  = "#ffaa22"
-blue    = "#5577ff"
-magenta = "#ff55ff"
-cyan    = "#22dddd"
-white   = "#e0e0e0"
+red     = "#800000"
+green   = "#008000"
+yellow  = "#808000"
+blue    = "#000080"
+magenta = "#800080"
+cyan    = "#008080"
+white   = "#C0C0C0"
 
-# Intense/Bright Colors (8-15) — Pure vibrant values
+# Bright Colors
 [colors.bright]
-black   = "#777777"
-red     = "#ff6666"
-green   = "#66ff66"
-yellow  = "#ffff66"
-blue    = "#6688ff"
-magenta = "#ff88ff"
-cyan    = "#66ffff"
-white   = "#ffffff"
+black   = "#808080"
+red     = "#FF0000"
+green   = "#00FF00"
+yellow  = "#FFFF00"
+blue    = "#0000FF"
+magenta = "#FF00FF"
+cyan    = "#00FFFF"
+white   = "#FFFFFF"
 
 [[keyboard.bindings]]
 key = "F11"
 mods = "None"
 action = "ToggleFullscreen"
+
+[colors]
+draw_bold_text_with_bright_colors = true

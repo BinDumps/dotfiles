@@ -5,13 +5,13 @@
     "spacing": 2,
 
     "modules-left": [
-        "custom/privacy"
+        "custom/privacy",
+        "niri/window"
     ],
 
     "modules-center": [
         "custom/start",
-        "niri/workspaces",
-        "niri/window"
+        "niri/workspaces"
     ],
 
     "modules-right": [
@@ -31,7 +31,7 @@
     ],
 
     "custom/start": {
-        "format": "󰖳",
+        "format": "\uf17a",
         "tooltip-format": "Start Menu",
         "on-click": "fuzzel"
     },
@@ -155,7 +155,7 @@
 
     "tray": {
         "icon-size": 16,
-        "spacing": 10
+        "spacing": 12
     },
 
     "custom/themes": {
@@ -174,7 +174,7 @@
     },
 
     "custom/separator": {
-        "format": "󰇙",
+        "format": "|",
         "interval": "once",
         "tooltip": false
     }
