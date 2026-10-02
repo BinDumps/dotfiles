@@ -3,18 +3,18 @@ size = 15.0
 
 [font.offset]
 x = 0
-y = 2  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
+y = 4  # Increase this integer to add line spacing (e.g., 2, 3, or 4)
 
 [font.bold]
-family = "CaskaydiaCove Nerd Font Mono"
+family = "Lucida Console"
 style = "Bold"
 
 [font.italic]
-family = "CaskaydiaCove Nerd Font Mono"
+family = "Lucida Console"
 style = "Italic"
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font Mono"
+family = "Lucida Console"
 style = "Regular"
 
 [window]

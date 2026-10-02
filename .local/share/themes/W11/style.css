@@ -1,26 +1,26 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Segoe UI;
+    font-family: "Segoe UI", "Segoe UI Variable Static Display", sans-serif;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: transparent;
-    border: none;
+    background-color: rgba(16, 16, 16, 0.75);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 window#waybar > box {
-    /* border: 1px solid #121021; */
-    background-color: rgba(0, 0, 0, 0.55);
-    padding: 6px 10px;
-    color: #e2d9f3;
+    padding: 2px 12px;
+    color: #ffffff;
 }
 
-/* Individual Module Pills */
+#custom-start,
+#custom-power,
 #workspaces,
+#window,
 #cpu,
 #memory,
 #pulseaudio,
@@ -28,137 +28,120 @@ window#waybar > box {
 #backlight,
 #custom-language,
 #custom-clipboard,
-#custom-power,
 #custom-themes,
-#network {
-    padding: 0px 8px;
-    background-color: #222222;
-    border-radius: 8px;
-    border: 1px solid #111111;
+#network,
+#tray,
+#clock {
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 2px 10px;
+    margin: 2px 2px;
+    transition: background-color 0.15s ease;
 }
 
-/* Fix Waybar Tray Context Menus */
-#tray menu {
-    background-color: #111111;
+/* Hover highlights */
+#custom-start:hover,
+#custom-power:hover,
+#workspaces button:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#pulseaudio.source:hover,
+#backlight:hover,
+#custom-language:hover,
+#custom-clipboard:hover,
+#custom-themes:hover,
+#network:hover,
+#tray:hover,
+#clock:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Windows Start Button */
+#custom-start {
+    font-size: 32px;
+    color: #00a4ef;
+    padding: 0px 12px;
+}
+
+#custom-start:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Power Menu Icon */
+#custom-power {
+    font-size: 20px;
+    padding: 0px 10px;
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 0 4px;
+}
+
+#workspaces button {
+    font-size: 15px;
+    padding: 0px 12px;
+    margin: 0 2px;
+    color: #888888;
+    background: transparent;
+    border-radius: 4px;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
     color: #ffffff;
-    border: 1px solid #c0c0c0;
-    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid #00a4ef;
+}
+
+/* System Tray & Misc Icons */
+#pulseaudio,
+#pulseaudio.source,
+#backlight,
+#custom-clipboard,
+#custom-themes,
+#network {
+    font-size: 20px;
+}
+
+#custom-language {
+    border-radius: 0;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+/* Restored Original Clock Styling */
+#clock {
+    font-size: 15px;    
+    font-weight: normal;
+    padding: 0px 8px 0px 12px;
+    -gtk-icon-transform: none;
+    color: #ffffff;
+}
+
+#tray menu {
+    background-color: #202020;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px;
 }
 
 #tray menu menuitem {
     background-color: transparent;
     color: #cccccc;
-    padding: 4px 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
 }
 
 #tray menu menuitem:hover {
-    background-color: #333333;
+    background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
 
-#tray,
-#window {
-    padding: 0px 16px;
-}
-
-#clock {
-    font-size: 15px;	
-    font-weight: normal;
-    padding: 0px 4px 0px 12px;
-    -gtk-icon-transform: none;
-}
-
-#custom-privacy {
-    padding: 0px 4px;
-}
-
-#custom-clipboard {
-    font-size: 20px;
-    color: #ffffff;
-}
-
-#custom-clipboard:hover {
-    color: #888888;
-}
-
-/* Workspaces styling for Niri */
-#workspaces button {
-    padding: 0 8px;
-    color: #555555;
-    background: transparent;
-}
-
-#workspaces button.active {
-    color: #ffffff;
-}
-
-#workspaces button:hover {
-    background: transparent;
-    color: #cccccc;
-}
-
-/* Module accent colors (Grayscale Hierarchy) */
-#clock {
-    color: #ffffff;
-}
-
-#cpu {
-    color: #dddddd;
-}
-
-#memory {
-    color: #bbbbbb;
-}
-
-/* Speaker Output */
-#pulseaudio {
-    color: #ffffff;
-}
-
-#pulseaudio:not(.source).muted {
-    color: #555555;
-}
-
-/* Microphone Input */
-#pulseaudio.source {
-    color: #ffffff;
-}
-
-#pulseaudio.source.source-muted {
-    color: #555555;
-}
-
-#network {
-    color: #cccccc;
-}
-
-#network.disconnected {
-    color: #666666;
-}
-
-#custom-power {
-    font-size: 20px;
-    padding: 0px 16px;
-}
-
-#custom-power:hover {
-    color: #888888;
-}
-
-#custom-language:hover {
-    color: #ffffff;
-}
-
-#custom-themes {
-    font-size: 20px;
-    color: #ffffff;
-}
-
-#custom-themes:hover {
-    color: #888888;
-}
-
-#window {
-    color: #dddddd;
-    font-weight: normal;
+#custom-separator {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 13px;                  
+    padding: 0 6px;
 }

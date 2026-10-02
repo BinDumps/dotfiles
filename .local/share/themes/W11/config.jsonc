@@ -1,19 +1,22 @@
 {
     "layer": "top",
     "position": "bottom",
-    "height": 36,
-    "spacing": 8,
+    "height": 48,
+    "spacing": 2,
 
     "modules-left": [
-        "custom/power",
+        "custom/privacy"
+    ],
+
+    "modules-center": [
+        "custom/start",
         "niri/workspaces",
         "niri/window"
     ],
-    "modules-center": [
-	"custom/privacy"
-    ],
+
     "modules-right": [
-	"tray",
+        "tray",
+	"custom/separator",
         "cpu",
         "memory",
         "pulseaudio",
@@ -23,8 +26,21 @@
         "custom/language",
         "custom/clipboard",
         "custom/themes",
-        "clock"
+        "clock",
+        "custom/power"
     ],
+
+    "custom/start": {
+        "format": "󰖳",
+        "tooltip-format": "Start Menu",
+        "on-click": "fuzzel"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip-format": "Power Menu",
+        "on-click": "~/.local/bin/waybar-powermenu.sh"
+    },
 
     "niri/workspaces": {
         "format": "{index}",
@@ -33,8 +49,8 @@
 
     "niri/window": {
         "format": "{}",
-        "max-length": 40,
-	"ellipsis": true,
+        "max-length": 30,
+        "ellipsis": true,
         "separate-outputs": true
     },
 
@@ -46,9 +62,9 @@
     },
 
     "clock": {
-	"format": "{:%I:%M %p\n%m-%d-%Y}",
+        "format": "{:%I:%M %p\n%m-%d-%Y}",
         "tooltip-format": "<span size='14000'><b>{:%B %Y}</b></span>\n\n<tt><span size='11000'>{calendar}</span></tt>",
-	"justify": "right",
+        "justify": "right",
         "align": 1,
         "calendar": {
             "mode": "month",
@@ -79,8 +95,8 @@
     },
 
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": "󰝟 Muted",
+        "format": "{icon}",
+        "format-muted": "󰝟",
         "format-icons": {
             "headphone": "󰋋",
             "hands-free": "󰋎",
@@ -93,34 +109,37 @@
         "scroll-step": 5,
         "on-click": "pavucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format": "Volume: {volume}%"
     },
 
     "pulseaudio#source": {
         "format": "{format_source}",
-        "format-source": "󰍬 {volume}%",
-        "format-source-muted": "󰍭 Muted",
+        "format-source": "󰍬",
+        "format-source-muted": "󰍭",
         "scroll-step": 5,
         "on-click": "pavucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format": "Mic Volume: {source_volume}%"
     },
 
     "backlight": {
-        "format": "{icon} {percent}%",
+        "format": "{icon}",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 5%+",
         "on-scroll-down": "brightnessctl set 5%-",
-        "tooltip": false
+        "tooltip": true,
+	"tooltip-format": "Brightness: {percent}%"
     },
 
     "network": {
-        "format-wifi": "󰤨 {signalStrength}%",
-        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-linked": "󰈀 {ifname} (No IP)",
-        "format-disconnected": "󰤭 Disconnected",
+        "format-wifi": "󰤨",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀",
+        "format-disconnected": "󰤭",
         "tooltip-format": "󰩟 {ipaddr} | 󰀂 {gwaddr}",
         "tooltip-format-wifi": "󰤨 {essid} ({signalStrength}%)\n󰩟 {ipaddr}",
         "tooltip-format-ethernet": "󰈀 {ifname}\n󰩟 {ipaddr}",
@@ -129,7 +148,7 @@
 
     "custom/language": {
         "exec": "~/.local/bin/waybar-niri-layout.sh",
-        "format": "󰌌 {}",
+        "format": "{}",
         "tooltip": false,
         "on-click": "niri msg action switch-layout next"
     },
@@ -145,12 +164,6 @@
         "tooltip-format": "Switch system theme",
         "on-click": "~/.local/bin/switch-theme.sh"
     },
-	    
-    "custom/power": {
-        "format": "󰐥",
-        "tooltip": false,
-        "on-click": "~/.local/bin/waybar-powermenu.sh"
-    },
 
     "custom/privacy": {
         "exec": "~/.local/bin/privacy-dots.sh",
@@ -158,5 +171,11 @@
         "interval": 2,
         "format": "{}",
         "on-click": "~/.local/bin/privacy-menu.sh"
-    } 
+    },
+
+    "custom/separator": {
+        "format": "󰇙",
+        "interval": "once",
+        "tooltip": false
+    }
 }
