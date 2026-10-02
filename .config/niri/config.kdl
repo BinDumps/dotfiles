@@ -667,6 +667,13 @@ window-rule {
     }
 }
 
+window-rule {
+    match app-id=r#"^REAPER$"#
+
+    // Force all matching windows to tile instead of floating
+    open-floating false
+}
+
 // Dark mode for apps (christ that took too long)
 
 environment {
@@ -675,3 +682,4 @@ environment {
 }
 
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
+
