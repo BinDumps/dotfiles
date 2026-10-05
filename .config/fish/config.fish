@@ -11,6 +11,9 @@ function fish_greeting
 	#set_color brblue --bold
 	#echo '                  age  ' $(set_color normal) $(system_age)
 	echo ''
+	# CHM GREETING
+	# ~/chmcrypt.sh
+	# echo ''
 end
 #funcsave fish_greeting
 
@@ -41,11 +44,21 @@ alias fastfetch-old='fastfetch -c ~/fastfetch.config.old.jsonc'
 alias rmhosts='rm -rf ~/.ssh/known_hosts'
 alias anon='fish -P'
 alias ssh="TERM=xterm-256color command ssh"
-alias lazyssh="TERM=xterm-256color command lazyssh"
+alias sshs="TERM=xterm-256color command sshs"
+
+# PATH
+export PATH="/home/ext/.local/bin:$PATH"
+export EDITOR="vim"
+fish_add_path ~/.local/share/yabridge/
+
+# Extra variables
+set -U fish_color_option 00ffff
+set -U fish_color_param 00ffff
+set -U fish_color_autosuggestion 555
 
 # ghostty-related configuration
 function sudo
-    # 1. Change terminal background to dark red
+    # 1. Change terminal background to dark red 
     printf "\e]11;#3b0000\a"
 
     # 2. Run the actual sudo command
@@ -54,7 +67,3 @@ function sudo
     # 3. Reset the terminal background back to your default
     printf "\e]111\a"
 end
-
-#PATH
-export PATH="/home/ext/.local/bin:$PATH"
-fish_add_path ~/.local/share/yabridge/
