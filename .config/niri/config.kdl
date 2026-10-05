@@ -667,6 +667,14 @@ window-rule {
     }
 }
 
+layer-rule {
+    match namespace="^launcher$"
+    
+    background-effect {
+        blur true
+    }
+}
+
 window-rule {
     match app-id=r#"^REAPER$"#
 
