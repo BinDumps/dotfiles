@@ -31,7 +31,7 @@ if command -v "$PW_DUMP_CMD" >/dev/null 2>&1 && command -v "$JQ_BIN" >/dev/null 
 
   if [ -n "$dump" ]; then
     while IFS=$'\t' read -r pid app_prop media_class node_name; do
-      
+
       if [[ -z "$pid" ]] || [[ "$pid" -eq 0 ]]; then
         if [ -n "$app_prop" ]; then
           pid=$(pgrep -x "$app_prop" | head -n1 || echo 0)
@@ -40,15 +40,16 @@ if command -v "$PW_DUMP_CMD" >/dev/null 2>&1 && command -v "$JQ_BIN" >/dev/null 
 
       if [[ "$pid" =~ ^[0-9]+$ ]] && [[ "$pid" -gt 0 ]]; then
         app_name=$(ps -p "$pid" -o comm= 2>/dev/null || echo "${app_prop:-Unknown}")
-        PID_APP_MAP["$pid"]="$app_name"
-        
-        # Audio input (Microphone)
-        if [[ "$media_class" =~ "Audio" ]] || [[ "$media_class" =~ "Stream/Input/Audio" ]] || [[ "$media_class" == "Audio/Source" ]]; then
+
+        # Audio input (Microphone / Capture)
+        if [[ "$media_class" =~ "Stream/Input/Audio" ]] || [[ "$media_class" =~ "Audio/Source" ]]; then
+          PID_APP_MAP["$pid"]="$app_name"
           [[ ! "${PID_USAGE_MAP[$pid]:-}" =~ "Microphone" ]] && PID_USAGE_MAP["$pid"]="${PID_USAGE_MAP[$pid]:-} Microphone"
         fi
-        
+
         # Video input / Screenshare
-        if [[ "$media_class" =~ "Video" ]] || [[ "$media_class" =~ "Stream/Input/Video" ]]; then
+        if [[ "$media_class" =~ "Video" ]]; then
+          PID_APP_MAP["$pid"]="$app_name"
           if [[ "$node_name" =~ "portal" ]] || [[ "$node_name" =~ "screencast" ]] || [[ "$node_name" =~ "obs" ]]; then
             [[ ! "${PID_USAGE_MAP[$pid]:-}" =~ "ScreenShare" ]] && PID_USAGE_MAP["$pid"]="${PID_USAGE_MAP[$pid]:-} ScreenShare"
           else
@@ -76,6 +77,7 @@ fi
 
 # --- 3. FALLBACK AUDIO RECORDING CHECK (/dev/snd/*) ---
 if command -v fuser >/dev/null 2>&1; then
+  # Note: ALSA PCM capture nodes strictly end in 'c' (e.g., pcmC0D0c), playback ends in 'p'
   SND_PIDS=$(fuser /dev/snd/pcm*c 2>/dev/null | xargs || true)
   for pid in $SND_PIDS; do
     if [[ "$pid" =~ ^[0-9]+$ ]]; then
@@ -92,7 +94,7 @@ if command -v dbus-send >/dev/null 2>&1; then
   if dbus-send --system --print-reply --dest=org.freedesktop.GeoClue2 \
      /org/freedesktop/GeoClue2/Manager org.freedesktop.DBus.Properties.Get \
      string:"org.freedesktop.GeoClue2.Manager" string:"InUse" 2>/dev/null | grep -q "boolean true"; then
-     
+
      for pid in $(pgrep -u "$USER" -x "firefox|chromium|chrome|geoclue|telegram-desktop" || true); do
        if [[ "$pid" =~ ^[0-9]+$ ]]; then
          app_name=$(ps -p "$pid" -o comm= 2>/dev/null || echo "Unknown")
@@ -108,13 +110,13 @@ MENU_OPTIONS=""
 for pid in "${!PID_APP_MAP[@]}"; do
   app="${PID_APP_MAP[$pid]}"
   raw_usage="${PID_USAGE_MAP[$pid]:-}"
-  
+
   usage_tags=""
   [[ "$raw_usage" =~ "Microphone" ]] && usage_tags="${usage_tags} [󰍬 Mic]"
   [[ "$raw_usage" =~ "Camera" ]] && usage_tags="${usage_tags} [󰄀 Cam]"
   [[ "$raw_usage" =~ "ScreenShare" ]] && usage_tags="${usage_tags} [󰍹 Screen]"
   [[ "$raw_usage" =~ "Location" ]] && usage_tags="${usage_tags} [󰍎 Location]"
-  
+
   if [ -n "$usage_tags" ]; then
     MENU_OPTIONS="${MENU_OPTIONS}${app} (PID: ${pid})${usage_tags}\n"
   fi
@@ -136,7 +138,7 @@ if [ -n "$SELECTED" ]; then
 
   if [ -n "$TARGET_PID" ]; then
     ACTION=$(printf "󰅙 Terminate Process (SIGTERM)\n󰓛 Force Kill (SIGKILL)\n󰜺 Cancel" | fuzzel --dmenu --prompt="󰈸 Action for ${APP_NAME} (${TARGET_PID}) > " --width=45 --lines=3)
-    
+
     case "$ACTION" in
       *"SIGTERM"*)
         kill "$TARGET_PID" && command -v notify-send >/dev/null 2>&1 && notify-send "Privacy Monitor" "Terminated ${APP_NAME} (PID: ${TARGET_PID})"
