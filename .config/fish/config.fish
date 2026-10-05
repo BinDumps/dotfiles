@@ -56,7 +56,8 @@ set -U fish_color_option 00ffff
 set -U fish_color_param 00ffff
 set -U fish_color_autosuggestion 555
 
-# ghostty-related configuration
+# ghostty-related configuration 
+# but works in most terminal emulators anyway
 function sudo
     # 1. Change terminal background to dark red 
     printf "\e]11;#3b0000\a"
