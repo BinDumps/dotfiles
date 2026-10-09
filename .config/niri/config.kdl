@@ -654,12 +654,12 @@ binds {
     // spawn waypaper
     Mod+Shift+W { spawn "waypaper"; }
     // spawn ghostty
-    Mod+Return { spawn "env" "__NV_PRIME_RENDER_OFFLOAD=1" "__VK_LAYER_NV_optimus=NVIDIA_only" "__GLX_VENDOR_LIBRARY_NAME=nvidia" "ghostty"; }
+    Mod+Return { spawn "kitty"; }
 }
 
 window-rule {
     match app-id="Alacritty"
-    match app-id="com.mitchellh.ghostty"
+    match app-id="kitty"
     // Disables painting a solid background tile beneath Alacritty
     draw-border-with-background false
     background-effect {
