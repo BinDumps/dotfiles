@@ -1,5 +1,5 @@
 [font]
-size = 17.0
+size = 19.0
 
 [font.offset]
 x = 0
@@ -35,18 +35,18 @@ background = "#545454"
 text = "#ffffff"
 
 # Regular Colors (0-7)
-[colors.bright]
-black   = "#c0c0c0"
-red     = "#800000"
+[colors.normal]
+black   = "#000000"
+red     = "#aa0000"
 green   = "#008000"
 yellow  = "#808000"
 blue    = "#000080"
 magenta = "#800080"
 cyan    = "#008080"
-white   = "#c0c0c0"
+white   = "#ffffff"
 
 # Intense/Bright Colors (8-15)
-[colors.normal]
+[colors.bright]
 black   = "#c0c0c0"
 red     = "#ff0000"
 green   = "#00ff00"
@@ -54,9 +54,12 @@ yellow  = "#ffff00"
 blue    = "#0000ff"
 magenta = "#ff00ff"
 cyan    = "#00ffff"
-white   = "#ffffff"
+white   = "#c0c0c0"
 
 [[keyboard.bindings]]
 key = "F11"
 mods = "None"
 action = "ToggleFullscreen"
+
+[colors]
+draw_bold_text_with_bright_colors = true
