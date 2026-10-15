@@ -1,0 +1,269 @@
+#!/usr/bin/env bash
+
+SSH_CONFIG="$HOME/.ssh/config"
+
+# Ensure ~/.ssh directory and config file exist
+mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
+touch "$SSH_CONFIG" && chmod 600 "$SSH_CONFIG"
+
+add_host() {
+    echo -e "\n--- Add New SSH Host ---"
+    read -rp "Alias / Host Name (e.g., linux-node1): " alias_name
+    [[ -z "$alias_name" ]] && echo "Alias cannot be empty." && return
+
+    # Check if host already exists (exact word match)
+    if awk -v target="$alias_name" '
+        $1 ~ /^[Hh][Oo][Ss][Tt]$/ {
+            for (i=2; i<=NF; i++) {
+                if ($i == target) exit 0
+            }
+        }
+        END { exit 1 }
+    ' "$SSH_CONFIG"; then
+        echo "Error: Host '${alias_name}' already exists in $SSH_CONFIG."
+        return
+    fi
+
+    read -rp "HostName / IP (e.g., 192.168.1.32): " ip_addr
+    [[ -z "$ip_addr" ]] && echo "IP cannot be empty." && return
+
+    read -rp "User [root]: " remote_user
+    remote_user=${remote_user:-root}
+
+    read -rp "Port [22]: " remote_port
+    remote_port=${remote_port:-22}
+
+    read -rp "IdentityFile / Key path (optional, press Enter to skip): " key_path
+
+    # Append block
+    {
+        echo ""
+        echo "Host ${alias_name}"
+        echo "    HostName ${ip_addr}"
+        echo "    User ${remote_user}"
+        echo "    Port ${remote_port}"
+        [[ -n "$key_path" ]] && echo "    IdentityFile ${key_path}"
+    } >> "$SSH_CONFIG"
+
+    echo -e "\nSuccessfully added '${alias_name}' to $SSH_CONFIG"
+}
+
+remove_host() {
+    echo -e "\n--- Existing Hosts ---"
+    mapfile -t hosts < <(awk '
+        $1 ~ /^[Hh][Oo][Ss][Tt]$/ {
+            for (i=2; i<=NF; i++) {
+                if ($i != "*") print $i
+            }
+        }
+    ' "$SSH_CONFIG")
+
+    if [[ ${#hosts[@]} -eq 0 ]]; then
+        echo "No configured hosts found in $SSH_CONFIG."
+        return
+    fi
+
+    for i in "${!hosts[@]}"; do
+        printf " [%d] %s\n" "$((i+1))" "${hosts[$i]}"
+    done
+
+    echo ""
+    read -rp "Select host number to REMOVE (or 'q' to cancel): " choice
+    [[ "$choice" == "q" || -z "$choice" ]] && return
+
+    if ! [[ "$choice" =~ ^[0-9]+$ ]] || (( choice < 1 || choice > ${#hosts[@]} )); then
+        echo "Invalid selection."
+        return
+    fi
+
+    target_host="${hosts[$((choice-1))]}"
+
+    python3 - "$SSH_CONFIG" "$target_host" << 'EOF'
+import sys, re
+
+config_path, host_to_del = sys.argv[1], sys.argv[2]
+with open(config_path, 'r') as f:
+    lines = f.readlines()
+
+new_lines = []
+skipping = False
+
+for line in lines:
+    match = re.match(r'^\s*Host\s+(.+)', line, re.IGNORECASE)
+    if match:
+        hosts_in_line = match.group(1).split()
+        if host_to_del in hosts_in_line:
+            skipping = True
+            continue
+        else:
+            skipping = False
+
+    if not skipping:
+        new_lines.append(line)
+
+with open(config_path, 'w') as f:
+    f.writelines(new_lines)
+EOF
+
+    echo -e "\nSuccessfully removed '${target_host}' from $SSH_CONFIG"
+}
+
+edit_host() {
+    echo -e "\n--- Existing Hosts ---"
+    mapfile -t hosts < <(awk '
+        $1 ~ /^[Hh][Oo][Ss][Tt]$/ {
+            for (i=2; i<=NF; i++) {
+                if ($i != "*") print $i
+            }
+        }
+    ' "$SSH_CONFIG")
+
+    if [[ ${#hosts[@]} -eq 0 ]]; then
+        echo "No configured hosts found in $SSH_CONFIG."
+        return
+    fi
+
+    for i in "${!hosts[@]}"; do
+        printf " [%d] %s\n" "$((i+1))" "${hosts[$i]}"
+    done
+
+    echo ""
+    read -rp "Select host number to EDIT (or 'q' to cancel): " choice
+    [[ "$choice" == "q" || -z "$choice" ]] && return
+
+    if ! [[ "$choice" =~ ^[0-9]+$ ]] || (( choice < 1 || choice > ${#hosts[@]} )); then
+        echo "Invalid selection."
+        return
+    fi
+
+    target_host="${hosts[$((choice-1))]}"
+
+    # Extract current settings for this host
+    eval "$(python3 - "$SSH_CONFIG" "$target_host" << 'EOF'
+import sys, re
+config_path, target = sys.argv[1], sys.argv[2]
+with open(config_path, 'r') as f:
+    lines = f.readlines()
+hostname, user, port, key = "", "root", "22", ""
+capturing = False
+for line in lines:
+    match = re.match(r'^\s*Host\s+(.+)', line, re.IGNORECASE)
+    if match:
+        hosts_in_line = match.group(1).split()
+        if target in hosts_in_line:
+            capturing = True
+            continue
+        else:
+            if capturing:
+                break
+    if capturing:
+        parts = line.strip().split(maxsplit=1)
+        if len(parts) == 2:
+            k, v = parts[0].lower(), parts[1]
+            if k == 'hostname': hostname = v
+            elif k == 'user': user = v
+            elif k == 'port': port = v
+            elif k == 'identityfile': key = v
+print(f"CUR_HOST='{hostname}'")
+print(f"CUR_USER='{user}'")
+print(f"CUR_PORT='{port}'")
+print(f"CUR_KEY='{key}'")
+EOF
+    )"
+
+    echo -e "\nEditing host '${target_host}' (Press Enter to keep current value)"
+    
+    read -rp "Alias / Host Name [$target_host]: " new_alias
+    new_alias=${new_alias:-$target_host}
+
+    read -rp "HostName / IP [$CUR_HOST]: " new_ip
+    new_ip=${new_ip:-$CUR_HOST}
+
+    read -rp "User [$CUR_USER]: " new_user
+    new_user=${new_user:-$CUR_USER}
+
+    read -rp "Port [$CUR_PORT]: " new_port
+    new_port=${new_port:-$CUR_PORT}
+
+    read -rp "IdentityFile / Key path [$CUR_KEY]: " new_key
+    new_key=${new_key:-$CUR_KEY}
+
+    python3 - "$SSH_CONFIG" "$target_host" "$new_alias" "$new_ip" "$new_user" "$new_port" "$new_key" << 'EOF'
+import sys, re
+
+config_path, target, new_alias, new_ip, new_user, new_port, new_key = sys.argv[1:]
+
+with open(config_path, 'r') as f:
+    lines = f.readlines()
+
+new_lines = []
+skipping = False
+
+for line in lines:
+    match = re.match(r'^\s*Host\s+(.+)', line, re.IGNORECASE)
+    if match:
+        hosts_in_line = match.group(1).split()
+        if target in hosts_in_line:
+            skipping = True
+            continue
+        else:
+            skipping = False
+
+    if not skipping:
+        new_lines.append(line)
+
+new_block = f"\nHost {new_alias}\n    HostName {new_ip}\n    User {new_user}\n    Port {new_port}\n"
+if new_key:
+    new_block += f"    IdentityFile {new_key}\n"
+
+new_lines.append(new_block)
+
+with open(config_path, 'w') as f:
+    f.writelines(new_lines)
+EOF
+
+    echo -e "\nSuccessfully updated '${target_host}' in $SSH_CONFIG"
+}
+
+list_hosts() {
+    echo -e "\n--- Configured Hosts ---"
+    awk '
+    function print_host() {
+        if (host != "" && host != "*") {
+            printf "  • %-18s -> %s@%s\n", host, (user ? user : "N/A"), (ip ? ip : "N/A")
+        }
+    }
+    $1 ~ /^[Hh][Oo][Ss][Tt]$/ {
+        print_host()
+        host = $2
+        user = ""
+        ip = ""
+        next
+    }
+    $1 ~ /^[Hh][Oo][Ss][Tt][Nn][Aa][Mm][Ee]$/ { ip = $2 }
+    $1 ~ /^[Uu][Ss][Ee][Rr]$/                 { user = $2 }
+    END { print_host() }
+    ' "$SSH_CONFIG"
+}
+
+# Interactive Menu Loop
+while true; do
+    echo -e "\n=============================="
+    echo "  SSH Config Manager"
+    echo "=============================="
+    echo "1) Add connection"
+    echo "2) Remove connection"
+    echo "3) Edit connection"
+    echo "4) List connections"
+    echo "5) Exit"
+    read -rp "Choice [1-5]: " opt
+
+    case $opt in
+        1) add_host ;;
+        2) remove_host ;;
+        3) edit_host ;;
+        4) list_hosts ;;
+        5) exit 0 ;;
+        *) echo "Invalid option." ;;
+    esac
+done
