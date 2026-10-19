@@ -1,0 +1,16 @@
+# glycin image loaders (used by GTK4/libadwaita for icons and images)
+/usr/share/glycin-loaders/{,**}                   r,
+/usr/lib/glycin-loaders/{,**}                     r,
+/usr/lib/glycin-loaders/**                        PUx,
+/usr/bin/bwrap                                    PUx,
+
+# Arch's Firefox ships gfxtest, not just glxtest
+/usr/lib/firefox/gfxtest                          mrix,
+
+# gvfs metadata
+owner @{HOME}/.local/share/gvfs-metadata/{,**}    rwk,
+
+# glycin lists / and checks the merged-/usr symlinks before starting bwrap
+/                                  r,
+/{bin,sbin,lib,lib64}              r,
+/usr/{,bin/,lib/}                  r,
