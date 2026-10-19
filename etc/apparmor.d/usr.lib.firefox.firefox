@@ -1,0 +1,264 @@
+# ---------------------------------------------------------------------------
+# AppArmor profile: Firefox (Arch Linux)
+# Install to : /etc/apparmor.d/usr.lib.firefox.firefox
+# Load       : sudo apparmor_parser -r /etc/apparmor.d/usr.lib.firefox.firefox
+# Test first : sudo aa-complain /etc/apparmor.d/usr.lib.firefox.firefox
+# Enforce    : sudo aa-enforce  /etc/apparmor.d/usr.lib.firefox.firefox
+#
+# Arch notes:
+#  - /usr/bin/firefox is a symlink to /usr/lib/firefox/firefox, and AppArmor
+#    matches the resolved path, so we attach to /usr/lib/firefox/*.
+#  - Only abstractions that exist in your /etc/apparmor.d/abstractions are used.
+#  - Check your ABI with: ls /etc/apparmor.d/abi   (change 4.0 -> 3.0 if needed)
+# ---------------------------------------------------------------------------
+
+abi <abi/4.0>,
+
+include <tunables/global>
+
+@{firefox_lib}    = /usr/lib/firefox
+@{firefox_home}   = @{HOME}/.mozilla
+@{firefox_xdg}    = @{HOME}/.config/mozilla
+@{firefox_cache}  = @{HOME}/.cache/mozilla
+
+profile firefox @{firefox_lib}/{firefox,firefox-bin} flags=(attach_disconnected) {
+
+  # ---- Abstractions -------------------------------------------------------
+  include <abstractions/base>
+  include <abstractions/nameservice>
+  include <abstractions/openssl>
+  include <abstractions/ssl_certs>
+  include <abstractions/p11-kit>
+  include <abstractions/crypto>
+
+  # Desktop / toolkit
+  include <abstractions/gtk>
+  include <abstractions/fonts>
+  include <abstractions/freedesktop.org>
+  include <abstractions/xdg-desktop>
+  include <abstractions/dconf>
+  include <abstractions/recent-documents-write>
+
+  # Display servers (Wayland and XWayland/X11)
+  include <abstractions/wayland>
+  include <abstractions/X>
+
+  # GPU / video / audio
+  include <abstractions/mesa>
+  include <abstractions/opengl>
+  include <abstractions/vulkan>
+  include <abstractions/dri-common>
+  include <abstractions/dri-enumerate>
+  include <abstractions/nvidia>          # harmless on AMD/Intel
+  include <abstractions/video>
+  include <abstractions/audio>
+
+  # Printing (remove if you never print)
+  include <abstractions/cups-client>
+
+  # Input methods (uncomment the one you use)
+  # include <abstractions/ibus>
+  # include <abstractions/fcitx>
+
+  # D-Bus (session bus is restricted to the explicit rules further below)
+  include <abstractions/dbus-session-strict>
+
+  # ---- Capabilities / namespaces -----------------------------------------
+  # Firefox's content-process sandbox uses user namespaces + chroot.
+  userns,
+  capability sys_admin,
+  capability sys_chroot,
+  capability setpcap,
+
+  # ---- Process control ----------------------------------------------------
+  ptrace peer=@{profile_name},
+  ptrace read peer=@{profile_name},
+  signal (send, receive) peer=@{profile_name},
+  signal receive peer=unconfined,
+
+  # ---- Network ------------------------------------------------------------
+  network inet stream,
+  network inet dgram,
+  network inet6 stream,
+  network inet6 dgram,
+  network netlink raw,
+  network netlink dgram,
+  network unix,
+  unix,
+
+  # ---- Binaries -----------------------------------------------------------
+  @{firefox_lib}/{firefox,firefox-bin}                              mrix,
+  @{firefox_lib}/{glxtest,vaapitest,pingsender,plugin-container}    mrix,
+  @{firefox_lib}/{crashreporter,crashhelper,updater}                mrix,
+  @{firefox_lib}/**                                                 mr,
+  /usr/lib/mozilla/**                                               mr,
+  /usr/lib/**.so*                                                   mr,
+  /usr/lib/{gtk-3.0,gtk-4.0,gdk-pixbuf-2.0,gio,dri,gbm,libvdpau,vdpau}/** mr,
+  /usr/lib/{pipewire-0.3,spa-0.2,pulseaudio,alsa-lib}/**            mr,
+
+  # Open links/files with the user's default apps (sandboxed helper below)
+  /usr/bin/xdg-open                                                 Cx -> xdg_open,
+
+  # ---- System read-only ---------------------------------------------------
+  /etc/firefox/{,**}                    r,
+  /etc/xdg/{,**}                        r,
+  /etc/mime.types                       r,
+  /etc/mailcap                          r,
+  /etc/machine-id                       r,
+  /etc/os-release                       r,
+  /etc/lsb-release                      r,
+  /etc/localtime                        r,
+  /etc/pki/{,**}                        r,
+  /etc/pkcs11/{,**}                     r,
+  /etc/hunspell/{,**}                   r,
+  /usr/share/firefox/{,**}              r,
+  /usr/share/mozilla/{,**}              r,
+  /usr/share/{applications,mime,icons,themes,fonts}/{,**} r,
+  /usr/share/{hunspell,myspell,hyphen,dict}/{,**}         r,
+  /usr/share/{glib-2.0,zoneinfo,X11/xkb,libdrm,glvnd,vulkan,drirc.d}/{,**} r,
+  /var/lib/dbus/machine-id              r,
+
+  # ---- /proc --------------------------------------------------------------
+  @{PROC}/{cpuinfo,meminfo,stat,uptime,loadavg,filesystems,version} r,
+  @{PROC}/sys/kernel/{osrelease,random/uuid,random/boot_id} r,
+  @{PROC}/sys/vm/{overcommit_memory,max_map_count} r,
+  @{PROC}/sys/fs/inotify/{max_user_watches,max_user_instances} r,
+  @{PROC}/sys/kernel/{pid_max,yama/ptrace_scope} r,
+  owner @{PROC}/@{pid}/**                                    r,
+  owner @{PROC}/@{pid}/{oom_score_adj,uid_map,gid_map,setgroups,comm} rw,
+  owner @{PROC}/@{pid}/task/*/comm                           rw,
+  @{PROC}/@{pid}/{stat,statm,status,cmdline,maps,smaps,cgroup,io} r,
+
+  # ---- /sys ---------------------------------------------------------------
+  /sys/devices/system/cpu/{,**}         r,
+  /sys/devices/system/node/{,**}        r,
+  /sys/devices/**/{uevent,vendor,device,subsystem_vendor,subsystem_device,class,revision,boot_vga,config,resource} r,
+  /sys/class/{,**}                      r,
+  /sys/bus/pci/devices/{,**}            r,
+  /sys/fs/cgroup/{,**}                  r,
+
+  # ---- /dev, runtime, temp ------------------------------------------------
+  /dev/null                             rw,
+  /dev/zero                             r,
+  /dev/{,u}random                       r,
+  /dev/tty                              rw,
+  /dev/video[0-9]*                      rw,   # webcam; remove to block camera
+  owner /dev/shm/org.mozilla.ipc.@{pid}.*  rw,
+  owner /dev/shm/{,**}                  rwk,
+  owner /tmp/{,**}                      rwk,
+  owner /var/tmp/{,**}                  rwk,
+  owner @{run}/user/@{uid}/{,**}        r,
+  owner @{run}/user/@{uid}/wayland-*    rw,
+  owner @{run}/user/@{uid}/pipewire-*   rw,
+  owner @{run}/user/@{uid}/pulse/{,native} rw,
+  owner @{run}/user/@{uid}/at-spi/*     rw,
+  owner @{run}/user/@{uid}/bus          rw,
+  owner @{run}/user/@{uid}/doc/{,**}    rw,   # xdg-desktop-portal document store
+  owner @{run}/user/@{uid}/.mutter-Xwaylandauth.* r,
+
+  # ---- Profile data -------------------------------------------------------
+  owner @{firefox_home}/{,**}                     rwk,
+  owner @{firefox_home}/**                        m,
+  owner @{firefox_xdg}/{,**}                      rwk,
+  owner @{firefox_xdg}/**                         m,
+  owner @{firefox_cache}/{,**}                    rwk,
+  owner @{firefox_cache}/**                       m,
+  owner @{HOME}/.cache/{thumbnails,fontconfig}/{,**}   rwk,
+  owner @{HOME}/.pki/nssdb/{,**}                  rwk,
+  owner @{HOME}/.local/share/pki/{,**}            rwk,
+  owner @{HOME}/.local/share/applications/{,**}   r,
+  owner @{HOME}/.config/mimeapps.list             r,
+  owner @{HOME}/.config/user-dirs.dirs            r,
+  owner @{HOME}/.config/{gtk-3.0,gtk-4.0,fontconfig,pulse}/{,**} r,
+
+  # Native messaging hosts (password managers etc.)
+  /usr/lib/mozilla/native-messaging-hosts/{,**}   r,
+  owner @{firefox_home}/native-messaging-hosts/{,**} r,
+
+  # ---- User files: downloads and uploads ----------------------------------
+  owner @{HOME}/@{XDG_DOWNLOAD_DIR}/{,**}   rw,
+  owner @{HOME}/@{XDG_DOCUMENTS_DIR}/{,**}  r,
+  owner @{HOME}/@{XDG_PICTURES_DIR}/{,**}   r,
+  owner @{HOME}/@{XDG_VIDEOS_DIR}/{,**}     r,
+  owner @{HOME}/@{XDG_MUSIC_DIR}/{,**}      r,
+  owner @{HOME}/@{XDG_DESKTOP_DIR}/{,**}    r,
+  owner /media/**                           r,
+  owner /run/media/*/{,**}            r,
+
+  # ---- D-Bus (session bus) ------------------------------------------------
+  dbus bind bus=session name=org.mozilla.firefox.*,
+  dbus bind bus=session name=org.mpris.MediaPlayer2.firefox.*,
+
+  dbus send    bus=session peer=(name=org.freedesktop.portal.*),
+  dbus receive bus=session peer=(name=org.freedesktop.portal.*),
+  dbus send    bus=session peer=(name=org.freedesktop.Notifications),
+  dbus receive bus=session peer=(name=org.freedesktop.Notifications),
+  dbus send    bus=session peer=(name=org.freedesktop.ScreenSaver),
+  dbus receive bus=session peer=(name=org.freedesktop.ScreenSaver),
+  dbus send    bus=session peer=(name=org.freedesktop.FileManager1),
+  dbus send    bus=session peer=(name=org.gnome.SessionManager),
+  dbus receive bus=session peer=(name=org.gnome.SessionManager),
+  dbus send    bus=session peer=(name=org.a11y.Bus),
+  dbus receive bus=session peer=(name=org.a11y.Bus),
+  dbus send    bus=session peer=(name=org.freedesktop.secrets),
+  dbus receive bus=session peer=(name=org.freedesktop.secrets),
+  dbus send    bus=session peer=(name=org.freedesktop.DBus),
+  dbus receive bus=session interface=org.mpris.MediaPlayer2*,
+  dbus receive bus=session interface=org.freedesktop.DBus.Properties,
+
+  # System bus: network state and power events (read-mostly)
+  dbus send    bus=system peer=(name=org.freedesktop.NetworkManager),
+  dbus receive bus=system peer=(name=org.freedesktop.NetworkManager),
+  dbus send    bus=system peer=(name=org.freedesktop.UPower),
+  dbus receive bus=system peer=(name=org.freedesktop.UPower),
+  dbus send    bus=system peer=(name=org.freedesktop.login1),
+  dbus receive bus=system peer=(name=org.freedesktop.login1),
+  dbus send    bus=system peer=(name=org.freedesktop.resolve1),
+
+  # ---- Explicit denials (these override allows above) ---------------------
+  deny @{HOME}/.{ssh,gnupg,aws,kube,docker,password-store}/** rwklx,
+  deny @{HOME}/.config/{Bitwarden,KeePassXC,keepassxc,1Password}/** rwklx,
+  deny @{HOME}/.{bash_history,zsh_history,history} rwklx,
+  deny @{HOME}/.{bashrc,zshrc,profile,bash_profile,zprofile} wklx,
+  deny /etc/{shadow,gshadow,sudoers,sudoers.d/**} rwklx,
+  deny /boot/** rwklx,
+  deny /root/** rwklx,
+  deny /sys/firmware/** rwklx,
+  deny @{PROC}/sys/kernel/{core_pattern,modprobe} wklx,
+  deny /{,usr/}bin/su rwklx,
+  deny /{,usr/}bin/sudo rwklx,
+
+  # ---- Child profile: xdg-open --------------------------------------------
+  # Runs helpers for "open with..." and launches the user's chosen apps.
+  # Launched apps use their own profile if one exists (P), otherwise run
+  # unconfined (U) with a scrubbed environment.
+  profile xdg_open /usr/bin/xdg-open {
+    include <abstractions/base>
+    include <abstractions/bash>
+    include <abstractions/consoles>
+    include <abstractions/dbus-session-strict>
+    include <abstractions/xdg-desktop>
+
+    /usr/bin/xdg-open                          r,
+    /usr/bin/{bash,sh,dash}                    rix,
+    /usr/bin/{basename,cat,cut,dirname,env,grep,head,ls,mktemp,readlink,sed,sort,tr,uname,which,whoami,xdg-mime,gio,gdbus} rix,
+    /usr/bin/**                                PUx,
+
+    /etc/xdg/{,**}                             r,
+    /usr/share/{applications,mime}/{,**}       r,
+    owner @{HOME}/.config/{mimeapps.list,user-dirs.dirs} r,
+    owner @{HOME}/.local/share/applications/{,**}        r,
+    owner @{HOME}/.local/share/mime/{,**}                r,
+    owner /tmp/{,**}                           rw,
+    owner @{run}/user/@{uid}/{,**}             r,
+
+    dbus send bus=session,
+    dbus receive bus=session,
+
+    signal (receive) peer=firefox,
+    include if exists <local/usr.lib.firefox.firefox//xdg_open>
+  }
+
+  # ---- Local site overrides ----------------------------------------------
+  include if exists <local/usr.lib.firefox.firefox>
+}
