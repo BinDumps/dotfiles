@@ -1,0 +1,8 @@
+[mode=default]
+default-timeout=5000
+ignore-timeout=1
+font=Terminess Nerd Font Mono 13
+background-color=#050505e6
+text-color=#ffffff
+border-color=#800000
+border-size=1

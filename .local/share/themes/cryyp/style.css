@@ -1,0 +1,223 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Terminess Nerd Font Mono", monospace;
+    font-weight: bold;
+    font-size: 15px;
+    min-height: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Root Bar Container */
+window#waybar {
+    background-color: transparent;
+    border: none;
+}
+
+window#waybar > box {
+    background-color: rgba(10, 10, 10, 0.50);
+    border-bottom: 1px solid #7a1212;
+    padding: 6px 12px;
+    color: #d1c7c7;
+}
+
+/* Individual Module Pills / Containers */
+#workspaces,
+#cpu,
+#memory,
+#pulseaudio,
+#pulseaudio.source,
+#backlight,
+#network,
+#custom-language {
+    background-color: #120808;
+    border-radius: 4px; /* Sharper, blockier industrial look */
+    border: 1px solid #331010;
+    padding: 2px 12px;
+    margin: 0px 3px;
+}
+
+/* Hover state for pill modules */
+#workspaces:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#custom-language:hover {
+    border-color: #ff2a2a;
+    background-color: #1a0a0a;
+}
+
+/* =============================================================================
+ * Workspaces (Niri Tiling Support)
+ * ============================================================================= */
+
+#workspaces button {
+    padding: 0 6px;
+    color: #5d4242;
+    background: transparent;
+    border-radius: 2px;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background-color: #8c1414;
+    border-bottom: 2px solid #ff2a2a;
+}
+
+#workspaces button:hover {
+    background: #261010;
+    color: #ff3b3b;
+}
+
+/* Target the Popup Window Boxes themselves */
+tooltip {
+    background-color: #0a0a0a;
+    border: 1px solid #7a1212;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+/* Target the base font inside the tooltip */
+tooltip label {
+    /* color: #d1c7c7; */
+    font-feature-settings: "tnum";
+}
+
+/* =============================================================================
+ * Module Specific Accent Colors
+ * ============================================================================= */
+
+/* Clock & Focused Window */
+#clock {
+    font-size: 15px;
+    padding: 0px 10px;
+    color: #ffffff;
+    background-color: #260a0a;
+    border: 1px solid #ff2a2a;
+    border-radius: 4px;
+}
+
+/* Native Waybar Calendar Classes (Nested inside tooltip) */
+tooltip .calendar-months {
+    color: #ff3b3b;
+}
+
+tooltip .calendar-weekdays {
+    color: #77a2a8;
+}
+
+tooltip .calendar-days {
+    color: #d1c7c7;
+}
+
+tooltip .calendar-today {
+    color: #0a0a0a;
+    background-color: #ff2a2a;
+    border-radius: 2px;
+}
+
+#window {
+    color: #b8adad;
+    font-weight: normal;
+    padding: 0 12px;
+}
+
+/* System Stats */
+#cpu {
+    color: #ff3b3b;
+}
+
+#memory {
+    color: #d91e1e;
+}
+
+/* Audio Controls */
+#pulseaudio {
+    color: #d1c7c7;
+}
+
+#pulseaudio:not(.source).muted {
+    color: #5a2626;
+    background-color: #0d0505;
+    border-color: #200808;
+}
+
+#pulseaudio.source {
+    color: #d1c7c7;
+}
+
+#pulseaudio.source.source-muted {
+    color: #5a2626;
+    background-color: #0d0505;
+    border-color: #200808;
+}
+
+/* Network */
+#network {
+    color: #77a2a8;
+}
+
+#network.disconnected {
+    color: #ff3b3b;
+    border-color: #7a1212;
+}
+
+/* Language Switcher */
+#custom-language {
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* Hardware Privacy Monitor */
+#custom-privacy {
+    padding: 0px 6px;
+    color: #ff2a2a;
+}
+
+/* Standalone Action Buttons */
+#custom-clipboard,
+#custom-themes,
+#custom-power {
+    font-size: 23px;
+    padding: 0 10px;
+    color: #8a7b7b;
+}
+
+#custom-clipboard:hover,
+#custom-themes:hover {
+    color: #ff3b3b;
+}
+
+#custom-power {
+    color: #d91e1e;
+}
+
+#custom-power:hover {
+    color: #ff2a2a;
+    text-shadow: 0 0 6px #ff2a2a;
+}
+
+/* Tray & Context Menus */
+#tray {
+    padding: 0 10px;
+}
+
+#tray menu {
+    background-color: #0a0a0a;
+    color: #d1c7c7;
+    border: 1px solid #7a1212;
+    padding: 4px;
+}
+
+#tray menu menuitem {
+    background-color: transparent;
+    color: #b8adad;
+    padding: 4px 8px;
+}
+
+#tray menu menuitem:hover {
+    background-color: #8c1414;
+    color: #ffffff;
+}

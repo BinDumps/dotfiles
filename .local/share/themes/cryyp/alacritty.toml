@@ -1,0 +1,65 @@
+[font]
+size = 19.0
+
+[font.offset]
+x = 0
+y = 2
+
+[font.normal]
+family = "Terminess Nerd Font Mono"
+style = "Bold"
+
+[font.bold]
+family = "Terminess Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Terminess Nerd Font Mono"
+style = "Italic"
+
+[window]
+padding = { x = 14, y = 14 }
+opacity = 0.88
+blur = true
+
+[colors.primary]
+background = "#000000"
+foreground = "#d1c7c7"
+
+[colors.cursor]
+cursor = "#ff2a2a"
+text = "#0a0a0a"
+
+[colors.selection]
+background = "#520e0e"
+text = "#ffffff"
+
+# Normal Colors (0-7) — Crimson Cipher Palette
+[colors.normal]
+black   = "#1a1a1a"
+red     = "#d91e1e"
+green   = "#5e8360"
+yellow  = "#b86a32"
+blue    = "#4f6075"
+magenta = "#961c4d"
+cyan    = "#567d82"
+white   = "#b8adad"
+
+# Bright Colors (8-15) — Vivid Highlights
+[colors.bright]
+black   = "#3d3131"
+red     = "#ff3b3b"
+green   = "#7ca67e"
+yellow  = "#e68a49"
+blue    = "#6b809b"
+magenta = "#c42968"
+cyan    = "#77a2a8"
+white   = "#f0e6e6"
+
+[[keyboard.bindings]]
+key = "F11"
+mods = "None"
+action = "ToggleFullscreen"
+
+[colors]
+draw_bold_text_with_bright_colors = true
