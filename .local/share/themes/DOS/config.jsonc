@@ -49,16 +49,16 @@
         "interval": 1,
         "format": "{:%I:%M:%S %p}",
         "format-alt": "{:%A, %B %d, %Y}",
-        "tooltip-format": "<span size='14000'><b>{:%B %Y}</b></span>\n\n<tt><span size='11000'>{calendar}</span></tt>",
+        "tooltip-format": "<tt><span size='15000' font='PxPlus IBM VGA8'>{calendar}</span></tt>",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 3,
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#bf94ff'><b>{}</b></span>",
-                "days": "<span color='#e2d9f3'><b>{}</b></span>",
-                "weekdays": "<span color='#aabaef'><b>{}</b></span>",
-                "today": "<span color='#ff79c6'><b><u>{}</u></b></span>"
+                "months": "<span color='#fafafa'><b>{}</b></span>",
+                "days": "<span color='#ffffff'><b>{}</b></span>",
+                "weekdays": "<span color='#8080ff'><b>{}</b></span>",
+                "today": "<span color='#000000' background='#0000ff'><b>{}</b></span>"
             }
         },
         "actions": {

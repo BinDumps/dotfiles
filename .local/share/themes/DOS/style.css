@@ -8,14 +8,14 @@
 }
 
 window#waybar {
-    background-color: transparent;
-    border: none;
+    background-color: #000000;
+    border-bottom: 1px solid #101010;
 }
 
 window#waybar > box {
     /* border: 1px solid #121021; */
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 6px 16px;
+    /*background-color: rgba(0, 0, 0, 0.5); */
+    padding: 8px 16px;
     color: #e2d9f3;
 }
 
