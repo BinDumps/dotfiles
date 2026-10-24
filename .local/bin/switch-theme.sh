@@ -22,6 +22,7 @@ if [ -d "$TARGET_DIR" ]; then
     [ -f "$TARGET_DIR/alacritty.toml" ] && cp "$TARGET_DIR/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
     [ -f "$TARGET_DIR/kitty.conf" ] && cp "$TARGET_DIR/kitty.conf" "$HOME/.config/kitty/kitty.conf"
     [ -f "$TARGET_DIR/fonts.conf" ] && cp "$TARGET_DIR/fonts.conf" "$HOME/.config/waybar/fonts.conf"
+    [ -f "$TARGET_DIR/hyprlock.conf" ] && cp "$TARGET_DIR/hyprlock.conf" "$HOME/.config/hypr/hyprlock.conf" && cp "$TARGET_DIR/lockscreen.jpg" "$HOME/.config/hypr/"
 
     # Manage user fonts dynamically
     if [ -d "$TARGET_DIR/fonts" ]; then
