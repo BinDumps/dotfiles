@@ -36,14 +36,15 @@
     },
 
     "niri/window": {
-        "format": "│ {}",
-        "max-length": 35,
+        "format": "{}",
+        "max-length": 37,
         "separate-outputs": true
     },
 
     "clock": {
+        "interval": 1,
         "format": "󰥔 {:%I:%M:%S %p}",
-        "format-alt": "{:%a %d %b}",
+        "format-alt": "󰃭 {:%Y-%m-%d}",
         "tooltip-format": "<tt><span size='11000'>{calendar}</span></tt>",
         "calendar": {
             "mode": "month",
