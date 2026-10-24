@@ -34,7 +34,7 @@
     "niri/window": {
         "format": "{}",
         "max-length": 40,
-	"ellipsis": true,
+        "ellipsis": true,
         "separate-outputs": true
     },
 
@@ -49,7 +49,7 @@
         "interval": 1,
         "format": "{:%I:%M:%S %p}",
         "format-alt": "{:%A, %B %d, %Y}",
-        "tooltip-format": "<tt><span size='15000' font='PxPlus IBM VGA8'>{calendar}</span></tt>",
+        "tooltip-format": "<span size='14000'><b>Calendar</b></span>\n\n<tt><span size='15000' font='PxPlus IBM VGA8'>{calendar}</span></tt>",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 3,
