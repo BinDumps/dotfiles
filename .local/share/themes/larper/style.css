@@ -29,12 +29,19 @@ window#waybar > box {
 #pulseaudio.source,
 #backlight,
 #network,
-#custom-privacy,
 #tray {
     padding: 0px 14px;
     background-color: #131021;
     border-radius: 12px;
     border: 1px solid #292240;
+}
+
+#custom-privacy {
+    padding: 0px 14px;
+}
+
+#workspaces {
+    padding: 4px;
 }
 
 /* Fix Waybar Tray Context Menus */
@@ -74,6 +81,11 @@ window#waybar > box {
     padding: 0 8px;
     color: #524868;
     background: transparent;
+}
+
+#workspaces button label {
+    padding: 0px 8px;
+    color: inherit;
 }
 
 #workspaces button.active {
