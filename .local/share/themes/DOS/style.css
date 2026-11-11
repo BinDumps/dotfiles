@@ -32,6 +32,10 @@ window#waybar > box {
     border: 1px solid #333333;
 }
 
+#workspaces {
+    padding: 4px;
+}
+
 /* Fix Waybar Tray Context Menus */
 #tray menu {
     background-color: #111111;
@@ -79,6 +83,11 @@ window#waybar > box {
     padding: 0 8px;
     color: #555555;
     background: transparent;
+}
+
+#workspaces button label {
+    padding: 0px 8px;
+    color: inherit;
 }
 
 #workspaces button.active {
