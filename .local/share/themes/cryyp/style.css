@@ -37,6 +37,10 @@ window#waybar > box {
     margin: 0px 3px;
 }
 
+#workspaces {
+    padding: 0 8px;
+}
+
 /* Hover state for pill modules */
 #workspaces:hover,
 #cpu:hover,
@@ -53,16 +57,29 @@ window#waybar > box {
  * ============================================================================= */
 
 #workspaces button {
-    padding: 0 6px;
+    padding: 0 8px;
+    margin: 0;
+    min-width: 0;
+    min-height: 0;
     color: #5d4242;
     background: transparent;
     border-radius: 2px;
 }
 
+#workspaces button label {
+    padding: 0px 4px;
+    color: inherit;
+}
+
 #workspaces button.active {
     color: #ffffff;
     background-color: #8c1414;
-    border-bottom: 2px solid #ff2a2a;
+    /* Uses inset shadow instead of border-bottom to avoid shifting vertical alignment */
+    box-shadow: inset 0 -2px 0 0 #ff2a2a;
+}
+
+#workspaces button.visible {
+    color: #d1c7c7;
 }
 
 #workspaces button:hover {
