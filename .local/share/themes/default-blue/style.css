@@ -22,12 +22,19 @@ window#waybar {
 #pulseaudio.source,
 #backlight,
 #network,
-#custom-privacy,
 #tray {
     padding: 0px 14px;
     background-color: #2e3440;
     border-radius: 12px;
     border: 1px solid #3b4252;
+}
+
+#custom-privacy {
+    padding: 0px 14px;
+}
+
+#workspaces {
+    padding: 4px;
 }
 
 /* Fix Waybar Tray Context Menus */
@@ -53,14 +60,10 @@ window#waybar {
     font-size: 19px;
     padding: 0 14px;
     color: #88c0d0;
-    background-color: #2e3440;
-    border-radius: 12px;
-    border: 1px solid #3b4252;
-
 }
 
 #custom-clipboard:hover {
-    color: #aaeafa;
+    color: #eefafa;
 }
 
 /* Workspaces styling for Niri */
@@ -68,6 +71,11 @@ window#waybar {
     padding: 0 8px;
     color: #4c566a;
     background: transparent;
+}
+
+#workspaces button label {
+    padding: 0px 8px;
+    color: inherit;
 }
 
 #workspaces button.active {
@@ -124,14 +132,10 @@ window#waybar {
     font-size: 20px;
     padding: 0 18px;
     color: #bf616a;
-    background-color: #2e3440;
-    border-radius: 12px;
-    border: 1px solid #3b4252;
-
 }
 
 #custom-power:hover {
-    color: #d08770;
+    color: #e08770;
 }
 
 #custom-language {
@@ -150,9 +154,6 @@ window#waybar {
     font-size: 20px;
     padding: 0 16px;
     color: #2ed791;
-    background-color: #2e3440;
-    border-radius: 12px;
-    border: 1px solid #282126;
 }
 
 #custom-themes:hover {
