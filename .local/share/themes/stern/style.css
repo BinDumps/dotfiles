@@ -33,6 +33,10 @@ window#waybar > box {
     border: 1px solid #333333;
 }
 
+#workspaces {
+    padding: 4px 10px;
+}
+
 /* Fix Waybar Tray Context Menus */
 #tray menu {
     background-color: #111111;
@@ -63,7 +67,7 @@ window#waybar > box {
 }
 
 #custom-privacy {
-    padding: 0px 4px;
+    padding: 0px 6px;
 }
 
 #custom-clipboard {
@@ -78,9 +82,15 @@ window#waybar > box {
 
 /* Workspaces styling for Niri */
 #workspaces button {
+    border-radius: 6px;
     padding: 0 8px;
     color: #555555;
     background: transparent;
+}
+
+#workspaces button label {
+    padding: 0px 6px;
+    color: inherit;
 }
 
 #workspaces button.active {
