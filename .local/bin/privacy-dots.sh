@@ -73,7 +73,7 @@ fi
 green="#30D158"   # mic
 orange="#FF9F0A"  # cam
 blue="#0A84FF"    # location
-grey="#555555"    # off
+grey="#A0A0A0"    # off
 
 dot() {
   local on="$1" color="$2"
