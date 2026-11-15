@@ -5,9 +5,9 @@
     "spacing": 8,
 
     "modules-left": [
-		"custom/privacy",
+	"custom/privacy",
         "niri/workspaces",
-		"tray",
+        "tray",
         "niri/window"
     ],
     "modules-center": [
@@ -69,12 +69,12 @@
     },
 
     "cpu": {
-        "format": "CPU {usage}%",
+        "format": "󰍛 {usage}%",
         "interval": 2
     },
 
     "memory": {
-        "format": "RAM {percentage}%",
+        "format": "󰘚 {percentage}%",
         "interval": 3
     },
 
