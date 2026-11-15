@@ -5,6 +5,7 @@
     font-weight: bold;
     font-size: 13px;
     min-height: 0;
+    transition: all 0.2s linear;
 }
 
 window#waybar {
@@ -14,7 +15,7 @@ window#waybar {
 
 window#waybar > box {
     /* border: 1px solid #121021; */
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 6px 16px;
     color: #e2d9f3;
 }
@@ -68,6 +69,12 @@ window#waybar > box {
 
 #custom-privacy {
     padding: 0px 6px;
+}
+
+#custom-privacy,
+#custom-privacy label,
+#custom-privacy span {
+    color: #ffffff;
 }
 
 #custom-clipboard {
@@ -178,3 +185,24 @@ window#waybar > box {
     font-weight: normal;
 }
 
+box:hover > #custom-test,
+box:hover > #custom-clipboard,
+box:hover > #custom-themes {
+    background-color: transparent;
+    color: #c0c0c0;
+}
+
+box:hover > #custom-power {
+    background-color: transparent;
+    color: #ff5050;
+}
+
+box:hover > #custom-test label,
+box:hover > #custom-clipboard label,
+box:hover > #custom-themes label {
+    color: #c0c0c0;
+}
+
+box:hover > #custom-power label {
+    color: #ff5050;
+}
