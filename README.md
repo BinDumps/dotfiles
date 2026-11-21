@@ -2,37 +2,12 @@ My dotfiles
 
 Packages used:
 
-```bash
-sudo pacman -S niri \
-  alacritty \
-  fuzzel \
-  waybar \
-  hyprlock \
-  swayidle \
-  mako \
-  cliphist \
-  wl-clipboard \
-  brightnessctl \
-  libnotify \
-  swww \
-  swayimg \
-  grim \
-  slurp \
-  xdg-desktop-portal-gnome \
-  polkit-gnome \
-  pavucontrol \
-  playerctl \
-  qt5ct \
-  qt6ct
+```
+niri alacritty fuzzel waybar hyprlock swayidle mako cliphist wl-clipboard brightnessctl libnotify swww swayimg grim slurp xdg-desktop-portal-gnome polkit-gnome pavucontrol playerctl qt5ct qt6ct
 ```
 
 Optional packages:
 ```
-shader-slang
+shader-slang waypaper fish zsh
 ```
 
-```bash
-sudo yay -s waypaper
-```
-
-optional: fish, ghostty
