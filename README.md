@@ -8,6 +8,6 @@ niri alacritty fuzzel waybar hyprlock swayidle mako cliphist wl-clipboard bright
 
 Optional packages:
 ```
-shader-slang waypaper fish zsh kitty
+kitty shader-slang waypaper fish zsh
 ```
 
