@@ -26,6 +26,11 @@ sudo pacman -S niri \
   qt6ct
 ```
 
+Optional packages:
+```
+shader-slang
+```
+
 ```bash
 sudo yay -s waypaper
 ```
